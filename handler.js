@@ -363,15 +363,18 @@ console.log(m.message)
 
 global.dfail = (type, m, conn) => {
 const msg = {
-rowner: `『✦』El comando *${comando}* solo puede ser usado por los creadores del bot.`, 
-owner: `『✦』El comando *${comando}* solo puede ser usado por los desarrolladores del bot.`, 
-mods: `『✦』El comando *${comando}* solo puede ser usado por los moderadores del bot.`, 
-premium: `『✦』El comando *${comando}* solo puede ser usado por los usuarios premium.`, 
-group: `『✦』El comando *${comando}* solo puede ser usado en grupos.`,
-private: `『✦』El comando *${comando}* solo puede ser usado al chat privado del bot.`,
-admin: `『✦』El comando *${comando}* solo puede ser usado por los administradores del grupo.`, 
-botAdmin: `『✦』Para ejecutar el comando *${comando}* debo ser administrador del grupo.`,
-restrict: `『✦』Esta caracteristica está desactivada.`
+rowner: `*ᐛ👑* Está funcion solo puede ser usada por mi *creador.*
+> ✰ 𝐃𝐞𝐬𝐜𝐨𝐧𝐨𝐬𝐢𝐝𝐨 𝐗𝐳𝐬𝐲 (•̀ᴗ•́)و`, 
+owner: `*ᐛ👑* Está funcion solo puede ser usada por mi *creador.*
+> ✰ 𝐃𝐞𝐬𝐜𝐨𝐧𝐨𝐬𝐢𝐝𝐨 𝐗𝐳𝐬𝐲 (•̀ᴗ•́)و`, 
+mods: `*ᐛ👑* Está funcion solo puede ser usada por mi *creador.*
+> ✰ 𝐃𝐞𝐬𝐜𝐨𝐧𝐨𝐬𝐢𝐝𝐨 𝐗𝐳𝐬𝐲 (•̀ᴗ•́)و`, 
+premium: `*ᐛ👑* Está funcion solo puede ser usada por los ciudadanos amigos del rey.`, 
+group: `*ᐛ👑* Está funcion encantada solo puede ser usada en reinos de poder *(grupos).*`,
+private: `*ᐛ👑* Está funcion encantada solo puede ser ejecutada en mi casa *(chat privado).*`,
+admin: `*ᐛ👑* Está funcion encantada solo puede ser ejecutada por las personas más importantes del reino *(grupo).*`, 
+botAdmin: `*ᐛ👑* Está funcion encantada solo puede ser ejecutada si yo soy una de las princesas de este reino *(grupo).*`,
+restrict: `*ᐛ👑* Está funcion encantada fue desactivada por mi padre *(creador).*`
 }[type]
 if (msg) return conn.reply(m.chat, msg, m, rcanal).then(_ => m.react('✖️'))
 }
