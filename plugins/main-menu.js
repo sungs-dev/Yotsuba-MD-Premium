@@ -9,7 +9,7 @@ let totalCommands = Object.values(global.plugins).filter((v) => v.help && v.tags
 let txt = `𝐇𝐨𝐥𝐚 @${userId.split('@')[0]},  𝐒𝐨𝐲 𝐘𝐨𝐭𝐬𝐮𝐛𝐚 𝐍𝐚𝐤𝐚𝐧𝐨 𝐀𝐈 
 
 > ꒰⌢ ʚ˚₊‧ ✎ ꒱ INFO:
-- Yotsuba Es un bot privado, solo está para uso en su grupo oficial ya que solo es un bot de herramientas.
+- Yotsuba Es un bot privado, el cual el bot principal no se unirá a tus grupos. Si quieres tener el bot en tu grupo tienes que ser Sub-Bot con *(#code)*
 > ꒰⌢ ʚ˚₊‧ ✎ ꒱ ❐ ʚ˚₊‧ʚ˚₊‧ʚ˚
 
 *╭━━━〔 BOT - INFO 〕━⬣*
