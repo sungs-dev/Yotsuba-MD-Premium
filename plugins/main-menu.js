@@ -12,7 +12,7 @@ let txt = `𝐇𝐨𝐥𝐚 @${userId.split('@')[0]},  𝐒𝐨𝐲 𝐘𝐨𝐭
 - Yotsuba Es un bot privado, solo está para uso en su grupo oficial ya que solo es un bot de herramientas.
 > ꒰⌢ ʚ˚₊‧ ✎ ꒱ ❐ ʚ˚₊‧ʚ˚₊‧ʚ˚
 
-*╭━━━〔 BOT - INFO ━━⬣*
+*╭━━━〔 BOT - INFO 〕━⬣*
 *│Creador:*  Desconocido Xzsy 
 *│Usuarios:* ${totalreg.toLocaleString()}
 *│Baileys:* Multi device 
