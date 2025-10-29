@@ -1,93 +1,49 @@
-import fetch from 'node-fetch'
-import yts from 'yt-search'
+import yts from 'yt-search';
 
-let handler = async (m, { conn, text, usedPrefix }) => {
-  const ctxErr = (global.rcanalx || {})
-  const ctxWarn = (global.rcanalw || {})
-  const ctxOk = (global.rcanalr || {})
-
+const handler = async (m, { conn, text, usedPrefix, command }) => {
   if (!text) {
-    return conn.reply(m.chat, `*ᐛ👑* Dime el nombre de la música encantada que quieres que busque.`.trim(), m, rcanal)
+    throw `*👑 Dime el nombre de la música encantada que quieres que busque.`;
   }
 
   try {
-    // Reacción de búsqueda
-    await conn.sendMessage(m.chat, { react: { text: "🔍", key: m.key } })
-    await conn.reply(m.chat, '*👑 Ya estoy Buscando tu audio encantado*', m, rcanal)
+    await m.react('🕒'); // Reacción de búsqueda
 
-    const search = await yts(text)
-    if (!search.videos.length) {
-      await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } })
-      throw new Error('😿 No encontré resultados para tu búsqueda.')
+    const search = await yts(text);
+    const videoInfo = search.all?.[0];
+
+    if (!videoInfo) {
+      throw '*No encontré nada we*';
     }
 
-    const video = search.videos[0]
-    const { title, url, thumbnail } = video
-
-    let thumbBuffer = null
-    if (thumbnail) {
-      try {
-        const resp = await fetch(thumbnail)
-        thumbBuffer = Buffer.from(await resp.arrayBuffer())
-      } catch (err) {
-        console.log('No se pudo obtener la miniatura:', err.message)
-      }
-    }
-
-    // ===== APIs para audio MP3 =====
-    const fuentes = [
-      { api: 'Adonix', endpoint: `https://api-adonix.ultraplus.click/download/ytmp3?apikey=${global.apikey}&url=${encodeURIComponent(url)}`, extractor: res => res?.data?.url },
-      { api: 'MayAPI', endpoint: `https://mayapi.ooguy.com/ytdl?url=${encodeURIComponent(url)}&type=mp3&apikey=${global.APIKeys['https://mayapi.ooguy.com']}`, extractor: res => res.result.url }
-    ]
-
-    let audioUrl, apiUsada, exito = false
-
-    for (let fuente of fuentes) {
-      try {
-        const response = await fetch(fuente.endpoint)
-        if (!response.ok) continue
-        const data = await response.json()
-        const link = fuente.extractor(data)
-        if (link) {
-          audioUrl = link
-          apiUsada = fuente.api
-          exito = true
-          break
-        }
-      } catch (err) {
-        console.log(`😔 Error con ${fuente.api}:`, err.message)
-      }
-    }
-
-    if (!exito) {
-      await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } })
-      return conn.reply(m.chat, '*😐 No encontré eso en ningún reino.*', m, ctxErr)
-    }
-
-    // Reacción de éxito antes de enviar el audio
-    await conn.sendMessage(m.chat, { react: { text: "✅", key: m.key } })
+    const body = `💜 Estoy buscando ${videoInfo.title} desde el canal ${videoInfo.author.name}
+> 😺 *Como lo quieres:*`;
 
     await conn.sendMessage(
       m.chat,
       {
-        audio: { url: audioUrl },
-        mimetype: 'audio/mpeg',
-        ptt: false,
-        jpegThumbnail: thumbBuffer,
-        caption: `*💜 Estoy buscando ${title}*`
+        image: { url: videoInfo.thumbnail },
+        caption: body,
+        footer: 'Yotsuba Nakano IA',
+        buttons: [
+          { buttonId: `.ytmp3 ${videoInfo.url}`, buttonText: { displayText: 'Como Audio' } },
+          { buttonId: `.play2 ${videoInfo.url}`, buttonText: { displayText: 'Como Video' } },
+        ],
+        viewOnce: true,
+        headerType: 4,
       },
       { quoted: m }
-    )
+    );
 
+    await m.react('✅'); // Reacción de éxito
   } catch (e) {
-    console.error('❌ Error en play:', e)
-    await conn.sendMessage(m.chat, { react: { text: "😢", key: m.key } })
-    await conn.reply(m.chat, `❌ Error: ${e.message}`, m, ctxErr)
+    await m.reply(`❌ *Error:* ${e.message}`);
+    await m.react('✖️');
   }
-}
+};
 
-handler.help = ['play']
-handler.tags = ['downloader']
-handler.command = ['play']
+handler.command = ['play', 'playvid'];
+handler.tags = ['downloader'];
+handler.group = true;
+handler.limit = 6;
 
-export default handler
+export default handler;
