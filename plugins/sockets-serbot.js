@@ -17,8 +17,8 @@ let crm3 = "SBpbmZvLWRvbmFyLmpz"
 let crm4 = "IF9hdXRvcmVzcG9uZGVyLmpzIGluZm8tYm90Lmpz"
 let drm1 = ""
 let drm2 = ""
-let rtx = "fuap1"
-let rtx2 = "fuap2"
+let rtx = "*Escanea este código qr Para vincular.*"
+let rtx2 = "*Código de vinculación:*"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const yukiJBOptions = {}
@@ -26,12 +26,12 @@ if (global.conns instanceof Array) console.log()
 else global.conns = []
 function isSubBotConnected(jid) { return global.conns.some(sock => sock?.user?.jid && sock.user.jid.split("@")[0] === jid.split("@")[0]) }
 let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
-if (!globalThis.db.data.settings[conn.user.jid].jadibotmd) return m.reply(`ꕥ El Comando *${command}* está desactivado temporalmente.`)
+if (!globalThis.db.data.settings[conn.user.jid].jadibotmd) return m.reply(`👑 El Comando *${command}* está desactivado temporalmente.`)
 let time = global.db.data.users[m.sender].Subs + 120000
-if (new Date - global.db.data.users[m.sender].Subs < 120000) return conn.reply(m.chat, `ꕥ Debes esperar ${msToTime(time - new Date())} para volver a vincular un *Sub-Bot.*`, m)
+if (new Date - global.db.data.users[m.sender].Subs < 120000) return conn.reply(m.chat, `👑 Debes esperar ${msToTime(time - new Date())} para volver a vincular un *Sub-Bot.*`, m, rcanal)
 let socklimit = global.conns.filter(sock => sock?.user).length
 if (socklimit >= 50) {
-return m.reply(`ꕥ No se han encontrado espacios para *Sub-Bots* disponibles.`)
+return m.reply(`👑 No se han encontrado espacios para *Sub-Bots* disponibles.`)
 }
 let mentionedJid = await m.mentionedJid
 let who = mentionedJid && mentionedJid[0] ? mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
@@ -50,9 +50,9 @@ yukiJBOptions.fromCommand = true
 yukiJadiBot(yukiJBOptions)
 global.db.data.users[m.sender].Subs = new Date * 1
 }
-handler.help = ['qrr', 'codee']
+handler.help = ['qrr', 'code']
 handler.tags = ['serbot']
-handler.command = ['qrr', 'codee']
+handler.command = ['qr', 'code']
 export default handler 
 
 export async function yukiJadiBot(options) {
@@ -74,7 +74,7 @@ fs.mkdirSync(pathYukiJadiBot, { recursive: true })}
 try {
 args[0] && args[0] != undefined ? fs.writeFileSync(pathCreds, JSON.stringify(JSON.parse(Buffer.from(args[0], "base64").toString("utf-8")), null, '\t')) : ""
 } catch {
-conn.reply(m.chat, `ꕥ Use correctamente el comando » ${usedPrefix + command}`, m)
+conn.reply(m.chat, `👑 Use correctamente el comando » ${usedPrefix + command}`, m, rcanal)
 return
 }
 const comb = Buffer.from(crm1 + crm2 + crm3 + crm4, "base64")
