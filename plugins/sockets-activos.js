@@ -35,7 +35,7 @@ let handler = async (m, { conn }) => {
     }
   }
 
-  let txt = `〔 👑 〕Conozco a ${sesiones} magos.\n\n💫 Reyes » *${totalPrincipales}*\n💛 Aprendices » *${totalSubs}*\n\n`
+  let txt = `〔 👑 〕Hay ${sesiones} magos reconocidos.\n\n`
   txt += `🌟 En este Reyno: *${botsEnGrupo}*\n`
 
   if (botsEnGrupo > 0) {
