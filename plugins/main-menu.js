@@ -32,6 +32,12 @@ let txt = `𝐇𝐨𝐥𝐚 @${userId.split('@')[0]},  𝐒𝐨𝐲 𝐘𝐨𝐭
 > ੭੭ ﹙ᰔᩚ﹚ ❏ #yta
 ╰━━━━━━━━━⬣
 
+*꒰⌢  ✎ ꒱ 𐔌 SOCKETS  𐦯*
+> ੭੭ ﹙ᰔᩚ﹚ ❏ #qr
+> ੭੭ ﹙ᰔᩚ﹚ ❏ #code
+> ੭੭ ﹙ᰔᩚ﹚ ❏ #setprimary
+╰━━━━━━━━━⬣
+
 *꒰⌢  ✎ ꒱ 𐔌 GRUPOS 𐦯*
 > ੭੭ ﹙ᰔᩚ﹚ ❏ #demote
 > ੭੭ ﹙ᰔᩚ﹚ ❏ #promote
@@ -40,6 +46,7 @@ let txt = `𝐇𝐨𝐥𝐚 @${userId.split('@')[0]},  𝐒𝐨𝐲 𝐘𝐨𝐭
 > ੭੭ ﹙ᰔᩚ﹚ ❏ #del
 > ੭੭ ﹙ᰔᩚ﹚ ❏ #promover
 > ੭੭ ﹙ᰔᩚ﹚ ❏ #degradar
+> ੭੭ ﹙ᰔᩚ﹚ ❏ #delprimary
 ╰━━━━━━━━━⬣
 
 *꒰⌢  ✎ ꒱ 𐔌 OWNER  𐦯*
