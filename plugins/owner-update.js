@@ -25,7 +25,7 @@ await conn.reply(m.chat, errorMessage, m)
 await m.react('✖️')
 }}} catch (error) {
 console.error(error)
-let errorMessage2 = '👑 Ocurrió un error inesperado.'
+let errorMessage2 = '😿 Ocurrió un error inesperado.'
 if (error.message) {
 errorMessage2 += '\n🛠 Mensaje de error: ' + error.message
 }
