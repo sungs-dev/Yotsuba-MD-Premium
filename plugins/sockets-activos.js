@@ -35,13 +35,13 @@ let handler = async (m, { conn }) => {
     }
   }
 
-  let txt = `〔 👑 〕Hay ${sesiones} magos reconocidos.\n\n`
+  let txt = `〔 👑 〕Hay *${sesiones}* magos reconocidos.\n\n\n`
   txt += `🌟 En este Reyno: *${botsEnGrupo}*\n`
 
   if (botsEnGrupo > 0) {
     for (let b of botsEnGrupoDetalles) {
       const numero = b.jid.split('@')[0]
-      txt += `\t\t🜸 [${b.tipo} ${botname}] » @${numero}\n`
+      txt += `\t\t🜸 [${b.tipo}] » @${numero}\n`
     }
   } else {
     txt += '\t\t😿 Ningún mago en este reyno\n'
