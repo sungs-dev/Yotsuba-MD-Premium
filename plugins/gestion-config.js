@@ -44,7 +44,7 @@ const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin })
   } else {
     return conn.reply(
       m.chat,
-      `👑 Los admins pueden activar o desactivar la función *${command}* utilizando:\n\n💜 *${command}* enable\n💜 *${command}* disable🛠 Estado actual » *${isEnable ? '✓ Activado' : '✗ Desactivado'}*`,
+      `👑 Los admins pueden activar o desactivar la función *${command}* utilizando:\n\n💜 *${command}* enable\n💜 *${command}* disable\n\n🛠 Estado actual » *${isEnable ? '✓ Activado' : '✗ Desactivado'}*`,
       m, rcanal
     )
   }
