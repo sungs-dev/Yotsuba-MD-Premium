@@ -4,13 +4,15 @@ import fetch from 'node-fetch'
 
 /**
  * Economy plugin (sin setname / setcurrency / setbanner / test)
+ * Ajustado: el comando de depósito (d / deposit / depositar) solo responde si el mensaje usa el prefijo (usedPrefix).
+ *
  * Comandos soportados:
  *  - daily, cofre           (cooldown 24h)
  *  - minar                 (cooldown 24 minutos)
  *  - crime / crimen
  *  - rob  (roba EXP)       (cooldown 1h)
  *  - rob2 (roba moneda)    (cooldown 1h)
- *  - d / deposit / depositar  (depositar all o cantidad)
+ *  - d / deposit / depositar  (depositar all o cantidad)  <-- ahora requiere prefijo para 'd'
  *  - bal                   (ver saldo de usuario, reply/mention o propio)
  *  - baltop <page?>        (top por grupo, 10 por página, solo en grupos)
  *  - lvl                   (subir de nivel si tiene >= 1000 exp)
@@ -97,6 +99,12 @@ const getThumbnailBuffer = async (url) => {
 let handler = async (m, { conn, text = '', usedPrefix = '#', command = '' }) => {
   const cmd = (command || '').toLowerCase()
   ensureDB()
+
+  // Normalizar texto del mensaje (varias formas según la librería)
+  const messageText = (m.text || m?.message?.conversation || m?.message?.extendedTextMessage?.text || '').toString()
+
+  // Detectar si el mensaje fue enviado con el prefijo
+  const hasPrefix = typeof usedPrefix === 'string' && messageText.startsWith(usedPrefix)
 
   // session config (currency and banner)
   const { config } = readSessionConfig(conn)
@@ -235,9 +243,22 @@ let handler = async (m, { conn, text = '', usedPrefix = '#', command = '' }) => 
       case 'd':
       case 'deposit':
       case 'depositar': {
+        // Requerir prefijo explícitamente para evitar que palabras que empiezan con "d" (p.ej. "DX", "XD") activen el handler.
+        // La excepción se aplica solo a la forma corta 'd'. Las variantes largas 'deposit'/'depositar' pueden seguir funcionando
+        // como antes (ya que es menos probable colisionar con texto casual).
+        if (cmd === 'd' && !hasPrefix) {
+          // No responder si el usuario no usó el prefijo para el comando corto 'd'
+          return
+        }
+
         const who = m.sender
         const u = ensureUser(who)
         const arg = (text || '').trim().split(/\s+/)[0] || ''
+
+        // Si el usuario respondió a un mensaje con texto "d 100" sin prefijo, text vendrá vacío en algunos frameworks;
+        // al exigir prefijo en 'd' evitamos falsas activaciones. Para 'deposit'/'depositar' se permite sin prefijo
+        // si la plataforma llama correctamente al handler.
+
         if (!arg) return sendAsChannel(m.chat, { text: 'Formato: #d all  o  #d <cantidad>' }, { quoted: m })
         if (arg.toLowerCase() === 'all') {
           const amount = u.money || 0
