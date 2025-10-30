@@ -11,7 +11,7 @@ const who = mentionedJid[0] ? mentionedJid[0] : m.quoted ? await m.quoted.sender
 if (!who) return conn.reply(m.chat, `*☹ Mensiona a quien quieres que aga que envie mi magia.*`, m)
 if (!subBots.includes(who)) return conn.reply(m.chat, `*🤨 Esta persona no es un mago fusionado conmigo. No tengo la capacidad  para hacer que solo el responda aquí.*`, m, rcanal)
 if (chat.primaryBot === who) {
-return conn.reply(m.chat, `*🙈 Ya respondo dentro de este cuerpo.*`, m, { mentions: [who] });
+return conn.reply(m.chat, `*🙈 Éxito, Ya solo un bot respondera*`, m, { mentions: [who] });
 }
 try {
 chat.primaryBot = who
