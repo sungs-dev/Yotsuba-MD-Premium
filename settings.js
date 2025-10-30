@@ -18,8 +18,8 @@ global.prems = []
 global.libreria = "Baileys Multi Device"
 global.vs = "^1.8.2|Latest"
 global.nameqr = "✯ Yotsuba Nakano ✰"
-global.sessions = "Sessions/Principal"
-global.jadi = "Sessions/SubBot"
+global.sessions = "Session"
+global.jadi = "JadiBots"
 global.yukiJadibts = true
 
 // ====
