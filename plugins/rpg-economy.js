@@ -100,7 +100,7 @@ let handler = async (m, { conn, text = '', usedPrefix = '#', command = '' }) => 
 
   // session config (currency and banner)
   const { config } = readSessionConfig(conn)
-  const currency = config?.currency || 'USD'
+  const currency = config?.currency || 'Coins'
   const banner = config?.banner || 'https://qu.ax/zRNgk.jpg'
   const thumbnail = await getThumbnailBuffer(banner).catch(() => null)
 
@@ -160,7 +160,7 @@ let handler = async (m, { conn, text = '', usedPrefix = '#', command = '' }) => 
         u.money = (u.money || 0) + amount
         u[key] = now
         return sendAsChannel(m.chat, {
-          text: `👑 Reclamante tu ${cmd === 'daily' ? 'recompensa diaria' : 'cofre de hoy'}. Recursos:\n\n${currency}: ${amount}\n> Vuelve en ${formatClock(cd)}`
+          text: `👑 Reclamante tu *${cmd === 'daily' ? 'recompensa diaria' : 'cofre de hoy'}.* Recursos:\n\n💜 *${currency}:* ${amount}`
         }, { quoted: m })
       }
 
@@ -172,7 +172,7 @@ let handler = async (m, { conn, text = '', usedPrefix = '#', command = '' }) => 
         const now = Date.now()
         if (now - (u.lastMinar || 0) < cd) {
           const rem = (u.lastMinar || 0) + cd - now
-          return sendAsChannel(m.chat, { text: `👑 Debes esperar ${formatDelta(rem)} para minar de nuevo.` }, { quoted: m })
+          return sendAsChannel(m.chat, { text: `👑 Debes esperar *${formatDelta(rem)}* para minar de nuevo.` }, { quoted: m })
         }
         const addExp = randInt(1, 49)
         const addMoney = randInt(1, 99)
@@ -180,7 +180,7 @@ let handler = async (m, { conn, text = '', usedPrefix = '#', command = '' }) => 
         u.money = (u.money || 0) + addMoney
         u.lastMinar = now
         return sendAsChannel(m.chat, {
-          text: `👑 Estabas minando. Recursos:\n\n💫 Exp: ${addExp}\n${currency}: ${addMoney}`
+          text: `👑 Estabas minando. Recursos:\n\n💫 *Exp:* ${addExp}\n💜 *${currency}:* ${addMoney}`
         }, { quoted: m })
       }
 
@@ -191,7 +191,7 @@ let handler = async (m, { conn, text = '', usedPrefix = '#', command = '' }) => 
         const u = ensureUser(who)
         const gained = randInt(1, 99)
         u.money = (u.money || 0) + gained
-        return sendAsChannel(m.chat, { text: `🌟 Cometiste tu crime de hoy en un banco y obtuviste: ${gained} ${currency}` }, { quoted: m })
+        return sendAsChannel(m.chat, { text: `🌟 Cometiste tu crime de hoy en un banco y obtuviste *${gained} ${currency}*` }, { quoted: m })
       }
 
       /* ---------------- ROB / ROB2 (1 hora): rob -> EXP, rob2 -> monedas ---------------- */
@@ -204,7 +204,7 @@ let handler = async (m, { conn, text = '', usedPrefix = '#', command = '' }) => 
         const cd = toMs(1, 0, 0) // 1 hora
         if (now - (u[cdKey] || 0) < cd) {
           const rem = (u[cdKey] || 0) + cd - now
-          return sendAsChannel(m.chat, { text: `👑 Debes esperar ${formatDelta(rem)} para usar ${cmd}` }, { quoted: m })
+          return sendAsChannel(m.chat, { text: `👑 Debes esperar *${formatDelta(rem)}* para usar *${cmd}*` }, { quoted: m })
         }
         const target = getTargetJid()
         if (!target) return sendAsChannel(m.chat, { text: '👑 Dime a quien quieres robar.' }, { quoted: m })
@@ -289,7 +289,7 @@ let handler = async (m, { conn, text = '', usedPrefix = '#', command = '' }) => 
 💫 Exp: ${u.exp || 0}
 💜 Bank: ${u.bank || 0}
 
-💜 Top: ${rankText}`
+> *${nombreBot}*`
 
         return sendAsChannel(m.chat, { text: out, mentions: [target] }, { quoted: m })
       }
