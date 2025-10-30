@@ -11,14 +11,14 @@ const handler = async (m, { conn, command, usedPrefix, text }) => {
     const disable = value === 'disable' || value === 'off'
     if (enable || disable) {
       if (isEnable === enable)
-        return m.reply(`ꕥ El modo *${type}* ya estaba ${enable ? 'activado' : 'desactivado'}.`)
+        return m.reply(`😐 El modo *${type}* ya estaba ${enable ? 'activado' : 'desactivado'} we.`, rcanal)
       config[type] = enable
-      return conn.reply(m.chat, `❀ Has *${enable ? 'activado' : 'desactivado'}* el modo *${type}* para el Socket.`, m)
+      return conn.reply(m.chat, `👑 Has *${enable ? 'activado' : 'desactivado'}* el modo *${type}* para esta session.`, m, rcanal)
     }
-    conn.reply(m.chat, `「✦」Puedes activar o desactivar el modo *${type}* utilizando:\n\n● Activar » ${usedPrefix}${command} enable\n● Desactivar » ${usedPrefix}${command} disable\n\n✧ Estado actual » *${isEnable ? '✓ Activado' : '✗ Desactivado'}*`, m)
+    conn.reply(m.chat, `「✦」Estado del modo: *${isEnable ? '✓ Activado' : '✗ Desactivado'}* , puedes activar o desactivar usando:\n\n- >${type} + on/off>`, m, rcanal)
   } catch (error) {
     await m.react('✖️')
-    conn.reply(m.chat, `⚠︎ Se ha producido un problema.\n> Usa *${usedPrefix}report* para informarlo.\n\n${error.message || error}`, m)
+    conn.reply(m.chat, `Error: \n\n${error.message || error}`, m, rcanal)
   }
 }
 
