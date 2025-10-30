@@ -3,8 +3,8 @@ import { join } from 'path'
 
 // Función para obtener nombre y banner del bot según la sesión/config
 function getBotConfig(conn) {
-  let nombreBot = typeof botname !== 'undefined' ? botname : 'Bot'
-  let bannerFinal = 'https://files.catbox.moe/cx0mbi.jpg'
+  let nombreBot = typeof botname !== 'undefined' ? botname : 'Yotsuba Nakano'
+  let bannerFinal = 'https://qu.ax/zRNgk.jpg'
 
   const botActual = conn.user?.jid?.split('@')[0]?.replace(/\D/g, '')
   const configPath = join('./JadiBots', botActual || '', 'config.json')
