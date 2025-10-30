@@ -28,7 +28,7 @@ export async function sendBye(conn, m) {
 
   let taguser = '@' + m.sender.split('@')[0]
   const { nombreBot, bannerFinal } = getBotConfig(conn)
-  const devby = `${nombreBot} - TextBot`
+  const devby = `${nombreBot}, ${textbot}`
 
   const despedida =
     `👋 BYE 👋\n\n` +
