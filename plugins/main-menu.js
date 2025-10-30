@@ -30,9 +30,10 @@ let handler = async (m, { conn, args }) => {
 > ꒰⌢ ʚ˚₊‧ ✎ ꒱ ❐ ʚ˚₊‧ʚ˚₊‧ʚ˚
 
 *╭━━━〔 BOT - INFO 〕━⬣*
-*│Creador:*  Desconocido Xzsy 
+*│Creador:* 𓆩‌۫᷼ ִֶָღܾ݉͢ғ꯭ᴇ꯭፝ℓɪ꯭ͨא𓆪 
 *│Usuarios:* ${totalreg.toLocaleString()}
 *│Baileys:* Multi device 
+*│Uptime: ${uptime}*
 *╰━━━━━━━━━━⬣*
 
 ➪ 𝗟𝗜𝗦𝗧𝗔 
