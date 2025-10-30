@@ -289,7 +289,7 @@ let handler = async (m, { conn, text = '', usedPrefix = '#', command = '' }) => 
 💫 Exp: ${u.exp || 0}
 💜 Bank: ${u.bank || 0}
 
-> *${nombreBot}*`
+> *PixelCrew-Team*`
 
         return sendAsChannel(m.chat, { text: out, mentions: [target] }, { quoted: m })
       }
