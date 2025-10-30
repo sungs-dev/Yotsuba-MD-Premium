@@ -1,12 +1,29 @@
-// commands/self.js
+const handler = async (m, { conn, command, usedPrefix, text }) => {
+  try {
+    const isSubBots = [conn.user.jid, ...global.owner.map(([number]) => `${number}@s.whatsapp.net`)].includes(m.sender)
+    if (!isSubBots) return m.reply(`🤨 Esto solo puede ser usado por mi we`)
 
-const handler = async (m, { conn, isOwner }) => {
-  if (!isOwner) return;
-  conn.public = false;
-  await conn.sendMessage(m.chat, { text: '*🔒 Bot en modo SELF (solo responde al owner).*' }, { quoted: m });
-};
+    const config = global.db.data.settings[conn.user.jid]
+    const value = text ? text.trim().toLowerCase() : ''
+    const type = 'self'
+    const isEnable = config[type] || false
+    const enable = value === 'enable' || value === 'on'
+    const disable = value === 'disable' || value === 'off'
+    if (enable || disable) {
+      if (isEnable === enable)
+        return m.reply(`🤨 El modo *${type}* ya estaba ${enable ? 'activado' : 'desactivado'}.`)
+      config[type] = enable
+      return conn.reply(m.chat, `👑 Has *${enable ? 'activado' : 'desactivado'}* el modo *${type}* para esta session.`, m, rcanal)
+    }
+    conn.reply(m.chat, `「✦」Puedes activar o desactivar el modo *${type}* utilizando:\n\n● Activar » ${usedPrefix}${command} enable\n● Desactivar » ${usedPrefix}${command} disable\n\n✧ Estado actual » *${isEnable ? '✓ Activado' : '✗ Desactivado'}*`, m, rcanal)
+  } catch (error) {
+    await m.react('✖️')
+    conn.reply(m.chat, `Error:.\n\n${error.message || error}`, m, rcanal)
+  }
+}
 
-handler.command = ['self'];
-handler.owner = true;
+handler.command = ['self']
+handler.help = ['self']
+handler.tags = ['socket']
 
-export default handler;
+export default handler
