@@ -194,7 +194,7 @@ userJid = sock.authState.creds.me.jid || `${path.basename(pathYukiJadiBot)}@s.wh
 console.log(chalk.bold.cyanBright(`\n❒⸺⸺⸺⸺【• SUB-BOT •】⸺⸺⸺⸺❒\n│\n│ ❍ ${userName} (+${path.basename(pathYukiJadiBot)}) conectado exitosamente.\n│\n❒⸺⸺⸺【• CONECTADO •】⸺⸺⸺❒`))
 sock.isInit = true
 global.conns.push(sock)
-m?.chat ? await conn.sendMessage(m.chat, { text: isSubBotConnected(m.sender) ? `*👑 Gracias por fusionarte conmigo, Ahora te mostraré mi poder encantado @${m.sender.split('@')[0]}*` : `*👑 Gracias por fusionarte conmigo, Ahora te mostraré mi poder encantado @${m.sender.split('@')[0]}*`, mentions: [m.sender] }, { quoted: m }) : ''
+m?.chat ? await conn.sendMessage(m.chat, { text: isSubBotConnected(m.sender) ? `👑 Gracias por fusionarte conmigo. Puedes ver los comandos para cambiar mi foto y nombre en la categoría sockets @${m.sender.split('@')[0]}.` : `👑 Gracias por fusionarte conmigo. Puedes ver los comandos para cambiar mi foto y nombre en la categoría sockets @${m.sender.split('@')[0]}.`, mentions: [m.sender] }, { quoted: m }) : ''
 }}
 setInterval(async () => {
 if (!sock.user) {
