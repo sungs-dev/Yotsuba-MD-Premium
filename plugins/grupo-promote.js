@@ -6,8 +6,8 @@ var number = text.split`@`[1]
 }else if(!isNaN(text)) {
 var number = text
 }
-if(!text && !m.quoted) return conn.reply(m.chat, `*ᐛ👑* Mensiona a un ciudadano de este mundo mágico para darle *privilegios altos.*`, m, fake)
-if(number.length > 13 || (number.length < 11 && number.length > 0)) return conn.reply(m.chat, `*ᐛ👑* Mensiona a un ciudadano de este mundo mágico para darle *privilegios altos.*`, m, fake)
+if(!text && !m.quoted) return conn.reply(m.chat, `*ᐛ👑* Mensiona a un ciudadano de este mundo mágico para darle *privilegios altos.*`, m, rcanal)
+if(number.length > 13 || (number.length < 11 && number.length > 0)) return conn.reply(m.chat, `*ᐛ👑* Mensiona a un ciudadano de este mundo mágico para darle *privilegios altos.*`, m, rcanal)
 try {
 if(text) {
 var user = number + '@s.whatsapp.net'
@@ -19,7 +19,7 @@ var user = number + '@s.whatsapp.net'
 } catch (e) {
 } finally {
 conn.groupParticipantsUpdate(m.chat, [user], 'promote')
-await conn.reply(m.chat, `*ᐛ👑* El ciudadano fue puesto como ayudante del rey *(creador del grupo)*`, m, fake)
+await conn.reply(m.chat, `*ᐛ👑* El ciudadano fue puesto como ayudante del rey *(creador del grupo)*`, m, rcanal)
 await m.react('💟')
 }}
 handler.help = ['promote *@user*']
