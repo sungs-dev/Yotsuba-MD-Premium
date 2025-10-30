@@ -97,7 +97,7 @@ const handler = async (m, { conn, command, args, usedPrefix, isAdmin, isOwner })
   } else {
     return conn.reply(
       m.chat,
-      `「✿」Un administrador puede activar o desactivar el *bye* utilizando:\n\n● _Activar_ » *${usedPrefix}${command} enable*\n● _Desactivar_ » *${usedPrefix}${command} disable*\n\n✎ Estado actual » *${isByeEnabled ? '✓ Activado' : '✗ Desactivado'}*`,
+      `👑 Los admins pueden activar o desactivar la función *${command}* utilizando:\n\n💜 *${command}* enable\n💜 *${command}* disable\n\n🛠 Estado actual » *${isEnable ? '✓ Activado' : '✗ Desactivado}*`,
       m
     )
   }
