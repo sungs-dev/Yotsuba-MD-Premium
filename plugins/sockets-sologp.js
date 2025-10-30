@@ -1,7 +1,7 @@
 const handler = async (m, { conn, command, usedPrefix, text }) => {
   try {
     const isSubBots = [conn.user.jid, ...global.owner.map(([number]) => `${number}@s.whatsapp.net`)].includes(m.sender)
-    if (!isSubBots) return m.reply(`😐 Solo yo puedo ejecutar esto we`, m, rcanal)
+    if (!isSubBots) return m.reply(`😐 Solo yo puedo ejecutar esto we`)
 
     const config = global.db.data.settings[conn.user.jid]
     const value = text ? text.trim().toLowerCase() : ''
@@ -11,7 +11,7 @@ const handler = async (m, { conn, command, usedPrefix, text }) => {
     const disable = value === 'disable' || value === 'off'
     if (enable || disable) {
       if (isEnable === enable)
-        return m.reply(`😐 El modo *${type}* ya estaba ${enable ? 'activado' : 'desactivado'} we.`, m, rcanal)
+        return m.reply(`😐 El modo *${type}* ya estaba ${enable ? 'activado' : 'desactivado'} we.`)
       config[type] = enable
       return conn.reply(m.chat, `👑 Has *${enable ? 'activado' : 'desactivado'}* el modo *${type}* para esta session.`, m, rcanal)
     }
