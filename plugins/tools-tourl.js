@@ -5,24 +5,25 @@ import fetch from 'node-fetch'
 let handler = async (m) => {
   let q = m.quoted ? m.quoted : m
   let mime = (q.msg || q).mimetype || ''
-  if (!mime) return conn.reply(m.chat, '*ᐛ👑* Responde a una *Imagen* o *Vídeo* para convertirlo en un *enlace encantado*', m, fake)
-  await m.react('🕓')
+  if (!mime) return conn.reply(m.chat, '*👑 Dime que foto o video encantado quieres convertir en enlace*', m, rcanal)
   try {
   let media = await q.download()
   let isTele = /image\/(png|jpe?g|gif)|video\/mp4/.test(mime)
   let link = await (isTele ? uploadImage : uploadFile)(media)
   let img = await (await fetch(`${link}`)).buffer()
-  let txt = `**ᐛ👑* Yotsuba IA *ᐛ👑*\n\n`
-      txt += `  *Enlace* : ${link}`
+  let txt = `乂  *L I N K - C A T B O X*  乂\n\n`
+      txt += `*» Enlace* : ${link}\n`
+      txt += `*» Tamaño* : ${formatBytes(media.length)}\n`
+      txt += `*» Expiración* : ${isTele ? 'No expira' : 'Desconocido'}\n\n`
+      txt += `> *${dev}*`
 
-await conn.sendFile(m.chat, img, 'thumbnail.jpg', txt, m, null, fake)
-await m.react('💟')
-} catch {
-await m.react('✖️')
+await conn.reply(m.chat, txt, m, rcanal)
+} catch (e) {
+await conn.reply(m.chat, '⚠︎ *Error:* ' + e, m, rcanal)
 }}
 handler.help = ['tourl']
 handler.tags = ['tools']
-handler.command = /^(tourl|upload)$/i
+handler.command = ['tourl4', 'catbox']
 export default handler
 
 function formatBytes(bytes) {
