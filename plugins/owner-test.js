@@ -8,22 +8,22 @@ const handler = async (m, { conn }) => {
   const configPath = join('./JadiBots', botActual || '', 'config.json')
 
   // Valores por defecto
-  let ncurrency = 'Test'
+  let currency = 'USD'
   let bannerFinal = 'https://qu.ax/zRNgk.jpg'
 
-  // Leer nombre/banner desde la config de la sesión si existe
+  // Leer currency/banner desde la config de la sesión si existe
   if (botActual && fs.existsSync(configPath)) {
     try {
       const config = JSON.parse(fs.readFileSync(configPath))
-      if (config.currency) ncurrency = config.currency
+      if (config.currency) currency = config.currency
       if (config.banner) bannerFinal = config.banner
     } catch (e) {
       // ignore
     }
   }
 
-  // Construir texto de prueba (puedes usar ${uptime} o ${p} en otras plantillas si los defines)
-  const text = `la moneda es ${ncurrency}`
+  // Construir texto de prueba (solo lectura del currency y simulación de mensaje de canal)
+  const text = `*TEST* — Mensaje desde el canal\n\nCurrency de sesión: *${currency}*\n\nEste es un mensaje de prueba que simula venir desde el canal.`
 
   // Preparar thumbnail (si falla se deja null)
   let thumbnail = null
@@ -36,7 +36,7 @@ const handler = async (m, { conn }) => {
 
   // Usar channelRD global si existe para simular mensaje de canal
   const newsletterJid = (global.channelRD && global.channelRD.id) ? global.channelRD.id : '0@s.whatsapp.net'
-  const newsletterName = (global.channelRD && global.channelRD.name) ? global.channelRD.name : nombreBot
+  const newsletterName = (global.channelRD && global.channelRD.name) ? global.channelRD.name : currency
 
   // Enviar mensaje con contexto de canal (forwarded newsletter) y externalAdReply
   await conn.sendMessage(m.chat, {
@@ -49,7 +49,7 @@ const handler = async (m, { conn }) => {
         newsletterName
       },
       externalAdReply: {
-        title: nombreBot,
+        title: currency,
         body: (global.textbot) ? global.textbot : '',
         mediaType: 1,
         mediaUrl: (global.redes) ? global.redes : '',
