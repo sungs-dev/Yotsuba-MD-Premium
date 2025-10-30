@@ -1,13 +1,43 @@
+// GitHub Copilot Chat Assistant
+
 import fs from 'fs'
 import { join } from 'path'
 import fetch from 'node-fetch'
 
+/**
+ * Convierte milisegundos a HH:MM:SS
+ */
+const formatClock = (ms) => {
+  if (typeof ms !== 'number' || isNaN(ms)) return '00:00:00'
+  const totalSeconds = Math.floor(ms / 1000)
+  const hours = Math.floor(totalSeconds / 3600)
+  const minutes = Math.floor((totalSeconds % 3600) / 60)
+  const seconds = totalSeconds % 60
+  return [hours, minutes, seconds].map(v => String(v).padStart(2, '0')).join(':')
+}
+
+/**
+ * Formatea un delta de tiempo (ms) en una cadena legible (ms / s / m)
+ */
+const formatPing = (ms) => {
+  if (typeof ms !== 'number' || isNaN(ms)) return '0ms'
+  if (ms < 1000) return `${ms} ms`
+  if (ms < 60_000) return `${(ms / 1000).toFixed(2)} s`
+  return `${(ms / 60000).toFixed(2)} m`
+}
+
 let handler = async (m, { conn, args }) => {
-  // Obtener el usuario mencionado o el que ejecuta el comando
+  // Cuenta de usuarios tomada desde la database global
+  let totalreg = 0
+  try {
+    totalreg = Object.keys(global.db.data.users).length
+  } catch (e) {
+    totalreg = 0
+  }
+
+  // Obtén el usuario mencionado o el que ejecuta el comando
   let mentionedJid = await m.mentionedJid
   let userId = mentionedJid && mentionedJid[0] ? mentionedJid[0] : m.sender
-  let totalreg = Object.keys(global.db.data.users).length
-  let totalCommands = Object.values(global.plugins).filter((v) => v.help && v.tags).length
 
   // ADAPTACIÓN para obtener nombre y banner del bot por sesión/config.json
   let nombreBot = typeof botname !== 'undefined' ? botname : 'Yotsuba Nakano'
@@ -23,6 +53,33 @@ let handler = async (m, { conn, args }) => {
     } catch (e) {}
   }
 
+  // Uptime: tiempo desde el último arranque del proceso (en ms)
+  let uptimeMs = 0
+  try {
+    // Si la conexión (Baileys) expone uptime, úsala; si no, usa process.uptime()
+    if (conn?.uptime) uptimeMs = conn.uptime
+    else if (typeof process !== 'undefined' && process.uptime) uptimeMs = Math.floor(process.uptime() * 1000)
+    else if (global.db?.data?.options?.startTime) uptimeMs = Date.now() - global.db.data.options.startTime
+    else uptimeMs = 0
+  } catch (e) {
+    uptimeMs = 0
+  }
+  const uptime = formatClock(uptimeMs)
+
+  // Determinar timestamp del mensaje de comando (si está disponible) y calcular ping
+  // Distintos handlers tienen distintas propiedades: probamos algunas comunes
+  let msgTimestamp = 0
+  if (m?.messageTimestamp) msgTimestamp = m.messageTimestamp * 1000
+  else if (m?.message?.timestamp) msgTimestamp = m.message.timestamp * 1000
+  else if (m?.key?.t) msgTimestamp = m.key.t * 1000
+  else if (m?.key?.fromMe && m?.key?.id) msgTimestamp = Date.now()
+  else msgTimestamp = Date.now()
+
+  // Ping = tiempo desde que el usuario envió el comando hasta ahora (ms)
+  const pingMs = Date.now() - msgTimestamp
+  const p = formatPing(pingMs)
+
+  // Construir el texto del menú (aquí se incluyen ${uptime} y ${p} ya resueltos)
   let txt = `𝐇𝐨𝐥𝐚 *@${userId.split('@')[0]},* 𝐒𝐨𝐲  *${nombreBot}*
 
 > ꒰⌢ ʚ˚₊‧ ✎ ꒱ INFO:
@@ -32,6 +89,8 @@ let handler = async (m, { conn, args }) => {
 *╭━━━〔 BOT - INFO 〕━⬣*
 *│Creador:* 𓆩‌۫᷼ ִֶָღܾ݉͢ғ꯭ᴇ꯭፝ℓɪ꯭ͨא𓆪 
 *│Usuarios:* ${totalreg.toLocaleString()}
+*│Uptime:* ${uptime}     ← aquí puedes usar \${uptime} en otras plantillas
+*│Ping:* ${p}           ← aquí puedes usar \${p} en otras plantillas
 *│Baileys:* PixelCrew-Bails
 *╰━━━━━━━━━━⬣*
 
@@ -71,7 +130,7 @@ let handler = async (m, { conn, args }) => {
 > *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #antienlace <on/off>*
 > *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #antilink <on/off>*
 
-*╰─ׅ─ׅ┈─๋︩︪─☪︎︎︎̸⃘̸࣭ٜ࣪࣪࣪۬◌⃘۪֟፝֯۫۫︎⃪𐇽۫۬👑⃘⃪۪֟፝֯۫۫۫۬◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸─ׅ─ׅ┈─๋︩︪─╯*
+*╰─ׅ─ׅ┈─๋︩︪─☪︎︎︎̸⃘࣭ٜ࣪࣪࣪۬◌⃘۪֟፝֯۫۫︎⃪𐇽۫۬👑⃘⃪۪֟፝֯۫۫۫۬◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸─ׅ─ׅ┈─๋︩︪─╯*
 
 *꒰⌢◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸ ✎ ꒱ 𐔌 GRUPOS 𐦯*
 > *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #demote*
@@ -83,12 +142,12 @@ let handler = async (m, { conn, args }) => {
 > *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #degradar*
 > *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #delprimary*
 > *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #setprimary*
-*╰─ׅ─ׅ┈─๋︩︪─☪︎︎︎̸⃘̸࣭ٜ࣪࣪࣪۬◌⃘۪֟፝֯۫۫︎⃪𐇽۫۬👑⃘⃪۪֟፝֯۫۫۫۬◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸─ׅ─ׅ┈─๋︩︪─╯*
+*╰─ׅ─ׅ┈─๋︩︪─☪︎︎︎̸⃘࣭ٜ࣪࣪࣪۬◌⃘۪֟፝֯۫۫︎⃪𐇽۫۬👑⃘⃪۪֟፝֯۫۫۫۬◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸─ׅ─ׅ┈─๋︩︪─╯*
 
 *꒰⌢◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸ ✎ ꒱ 𐔌 OWNER  𐦯*
 > *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #autoadmin*
 > *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #join*
-*╰─ׅ─ׅ┈─๋︩︪─☪︎︎︎̸⃘̸࣭ٜ࣪࣪࣪۬◌⃘۪֟፝֯۫۫︎⃪𐇽۫۬👑⃘⃪۪֟፝֯۫۫۫۬◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸─ׅ─ׅ┈─๋︩︪─╯*
+*╰─ׅ─ׅ┈─๋︩︪─☪︎︎︎̸⃘࣭ٜ࣪࣪࣪۬◌⃘۪֟፝֯۫۫︎⃪𐇽۫۬👑⃘⃪۪֟፝֯۫۫۫۬◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸─ׅ─ׅ┈─๋︩︪─╯*
 
 > ✰ 𝐃𝐞𝐬𝐜𝐨𝐧𝐨𝐜𝐢𝐝𝐨 𝐗𝐳𝐬𝐲 (•̀ᴗ•́)و`.trim()
 
@@ -98,17 +157,17 @@ let handler = async (m, { conn, args }) => {
       mentionedJid: [userId],
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: channelRD.id,
+        newsletterJid: channelRD?.id || '',
         serverMessageId: '',
-        newsletterName: channelRD.name
+        newsletterName: channelRD?.name || ''
       },
       externalAdReply: {
         title: nombreBot,
-        body: textbot,
+        body: textbot || '',
         mediaType: 1,
-        mediaUrl: redes,
-        sourceUrl: redes,
-        thumbnail: await (await fetch(bannerFinal)).buffer(),
+        mediaUrl: redes || '',
+        sourceUrl: redes || '',
+        thumbnail: await (await fetch(bannerFinal)).buffer().catch(()=>null),
         showAdAttribution: false,
         containsAutoReply: true,
         renderLargerThumbnail: true
