@@ -49,7 +49,7 @@ const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin })
     )
   }
   chat[type] = isEnable
-  conn.reply(m.chat, `🙈 Has *${isEnable ? 'activado' : 'desactivado'}* el *${type}* para este grupo.`, m, rcanal)
+  conn.reply(m.chat, `🙈 La función *${type}* fue *${isEnable ? 'activada' : 'desactivada'}* para este grupo.`, m, rcanal)
 }
 
 handler.help = ['welcome', 'bienvenida', 'modoadmin', 'onlyadmin', 'antilink', 'antienlace']
