@@ -69,7 +69,7 @@ const handler = async (m, { conn, command }) => {
       mentionedJid: [m.sender],
       externalAdReply: {
         title: devby,
-        sourceUrl: 'makima-bot/',
+        sourceUrl: 'https://whatsapp.com/',
         mediaType: 1,
         renderLargerThumbnail: true,
         thumbnailUrl: bannerFinal
