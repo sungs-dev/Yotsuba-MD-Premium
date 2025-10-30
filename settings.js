@@ -30,6 +30,7 @@ global.dev = "✰ 𝐃𝐞𝐬𝐜𝐨𝐧𝐨𝐬𝐢𝐝𝐨 𝐗𝐳𝐬𝐲 
 global.author = "✰ 𝐃𝐞𝐬𝐜𝐨𝐧𝐨𝐬𝐢𝐝𝐨 𝐗𝐳𝐬𝐲 (•̀ᴗ•́)و"
 global.etiqueta = "✰ 𝐃𝐞𝐬𝐜𝐨𝐧𝐨𝐬𝐢𝐝𝐨 𝐗𝐳𝐬𝐲 (•̀ᴗ•́)و"
 global.currency = "Estrellas"
+global.emoji = "👑"
 global.banner = "https://files.catbox.moe/o2zoj6.png"
 global.icono = "https://files.catbox.moe/o2zoj6.png"
 global.catalogo = "https://files.catbox.moe/o2zoj6.png"
