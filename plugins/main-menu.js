@@ -32,7 +32,7 @@ let handler = async (m, { conn, args }) => {
 *╭━━━〔 BOT - INFO 〕━⬣*
 *│Creador:* 𓆩‌۫᷼ ִֶָღܾ݉͢ғ꯭ᴇ꯭፝ℓɪ꯭ͨא𓆪 
 *│Usuarios:* ${totalreg.toLocaleString()}
-*│Baileys:* YukiBails
+*│Baileys:* PixelCrew-Bails
 *╰━━━━━━━━━━⬣*
 
 ➪ 𝗟𝗜𝗦𝗧𝗔 
