@@ -42,7 +42,7 @@ export async function sendBye(conn, m) {
       mentionedJid: [m.sender],
       externalAdReply: {
         title: devby,
-        sourceUrl: 'makima-bot/',
+        sourceUrl: 'https://whatsapp.com/',
         mediaType: 1,
         renderLargerThumbnail: true,
         thumbnailUrl: bannerFinal
@@ -71,7 +71,7 @@ const handler = async (m, { conn, command, args, usedPrefix, isAdmin, isOwner })
         mentionedJid: [m.sender],
         externalAdReply: {
           title: devby,
-          sourceUrl: 'makima-bot/',
+          sourceUrl: 'https://whatsapp.com/',
           mediaType: 1,
           renderLargerThumbnail: true,
           thumbnailUrl: bannerFinal
@@ -97,7 +97,7 @@ const handler = async (m, { conn, command, args, usedPrefix, isAdmin, isOwner })
   } else {
     return conn.reply(
       m.chat,
-      `👑 Los admins pueden activar o desactivar la función *${command}* utilizando:\n\n💜 *${command}* enable\n💜 *${command}* disable\n\n🛠 Estado actual » *${isEnable ? '✓ Activado' : '✗ Desactivado}*`,
+      `👑 Los admins pueden activar o desactivar la función *${command}* utilizando:\n\n💜 *${command}* enable\n💜 *${command}* disable\n\n🛠 Estado actual » *${isEnable ? '✓ Activado' : '✗ Desactivado'}*`,
       m
     )
   }
