@@ -89,8 +89,8 @@ let handler = async (m, { conn, args }) => {
 *╭━━━〔 BOT - INFO 〕━⬣*
 *│Creador:* 𓆩‌۫᷼ ִֶָღܾ݉͢ғ꯭ᴇ꯭፝ℓɪ꯭ͨא𓆪 
 *│Usuarios:* ${totalreg.toLocaleString()}
-*│Uptime:* ${uptime}     ← aquí puedes usar \${uptime} en otras plantillas
-*│Ping:* ${p}           ← aquí puedes usar \${p} en otras plantillas
+*│Uptime:* ${uptime}
+*│Ping:* ${p}
 *│Baileys:* PixelCrew-Bails
 *╰━━━━━━━━━━⬣*
 
