@@ -3,8 +3,8 @@ import { join } from 'path'
 
 // Función para obtener nombre y banner del bot según la sesión/config
 function getBotConfig(conn) {
-  let nombreBot = typeof botname !== 'undefined' ? botname : 'Bot'
-  let bannerFinal = 'https://files.catbox.moe/cx0mbi.jpg'
+  let nombreBot = typeof botname !== 'undefined' ? botname : 'Yotsuba Nakano IA'
+  let bannerFinal = 'https://qu.ax/zRNgk.jpg'
 
   const botActual = conn.user?.jid?.split('@')[0]?.replace(/\D/g, '')
   const configPath = join('./JadiBots', botActual || '', 'config.json')
@@ -26,7 +26,7 @@ export async function sendWelcome(conn, m) {
 
   let taguser = '@' + m.sender.split('@')[0]
   const { nombreBot, bannerFinal } = getBotConfig(conn)
-  const devby = `${nombreBot} - TextBot`
+  const devby = `${nombreBot}, ${textbot}`
 
   const bienvenida =
     `👑 WELCOME 👑\n\n` +
@@ -40,7 +40,7 @@ export async function sendWelcome(conn, m) {
       mentionedJid: [m.sender],
       externalAdReply: {
         title: devby,
-        sourceUrl: 'makima-bot/',
+        sourceUrl: 'https://whatsapp.com/',
         mediaType: 1,
         renderLargerThumbnail: true,
         thumbnailUrl: bannerFinal
@@ -55,7 +55,7 @@ const handler = async (m, { conn, command }) => {
 
   let taguser = '@' + m.sender.split('@')[0]
   const { nombreBot, bannerFinal } = getBotConfig(conn)
-  const devby = `${nombreBot} - TextBot`
+  const devby = `${nombreBot}, ${textbot}`
 
   const bienvenida =
     `👑 WELCOME 👑\n\n` +
