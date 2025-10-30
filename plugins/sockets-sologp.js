@@ -13,7 +13,7 @@ const handler = async (m, { conn, command, usedPrefix, text }) => {
       if (isEnable === enable)
         return m.reply(`😐 El modo *${type}* ya estaba ${enable ? 'activado' : 'desactivado'} we.`)
       config[type] = enable
-      return conn.reply(m.chat, `👑 Has *${enable ? 'activado' : 'desactivado'}* el modo *${type}* para esta session.`, m, rcanal)
+      return conn.reply(m.chat, `👑 Has *${enable ? 'activado' : 'desactivado'}* el modo *${type}* para esta session.`)
     }
     conn.reply(m.chat, `「✦」Estado del modo: *${isEnable ? '✓ Activado' : '✗ Desactivado'}* , puedes activar o desactivar usando:\n\n- >${type} + on/off>`, m, rcanal)
   } catch (error) {
