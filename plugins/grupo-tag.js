@@ -1,12 +1,12 @@
 // Código creado por Félix 
 
-const handler = async (m, { conn, text, participants, isAdmin, isBotAdmin, rcanal }) => {
+const handler = async (m, { conn, text, participants, isAdmin, isBotAdmin }) => {
   // Verifica si el usuario es admin
   if (!isAdmin) {
     await conn.sendMessage(
-      rcanal, // <- usa rcanal como el canal de salida
+      m.chat,
       { text: `*👑 Este comando solo puede ser usado por admins.*` },
-      { quoted: rcanal }
+      { quoted: m }
     );
     return;
   }
@@ -14,9 +14,9 @@ const handler = async (m, { conn, text, participants, isAdmin, isBotAdmin, rcana
   // Verifica que haya texto
   if (!text) {
     await conn.sendMessage(
-      rcanal, // <- usa rcanal como el canal de salida
+      m.chat,
       { text: `*🙃 Escribe el mensaje a enviar. Ejemplo: #tag Hola grupo.*` },
-      { quoted: rcanal }
+      { quoted: m }
     );
     return;
   }
@@ -26,11 +26,11 @@ const handler = async (m, { conn, text, participants, isAdmin, isBotAdmin, rcana
     .filter(u => u.id !== conn.user.jid) // omite al bot
     .map(u => u.id);
 
-  // Envía el mensaje mencionando a todos, usando el canal
+  // Envía el mensaje mencionando a todos SIN responder al mensaje original
   await conn.sendMessage(
-    rcanal, // <- usa rcanal como el canal de salida
+    m.chat,
     { text, mentions }
-    // Sin quoted, como lo pediste
+    // <-- Aquí NO va { quoted: m }
   );
 };
 
