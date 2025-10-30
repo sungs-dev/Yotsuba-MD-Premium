@@ -33,7 +33,6 @@ let handler = async (m, { conn, args }) => {
 *│Creador:* 𓆩‌۫᷼ ִֶָღܾ݉͢ғ꯭ᴇ꯭፝ℓɪ꯭ͨא𓆪 
 *│Usuarios:* ${totalreg.toLocaleString()}
 *│Baileys:* Multi device 
-*│Uptime: ${uptime}*
 *╰━━━━━━━━━━⬣*
 
 ➪ 𝗟𝗜𝗦𝗧𝗔 
