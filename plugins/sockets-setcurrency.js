@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 
 const handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) return m.reply(`👑 Formato erróneo. Cambia mi nombre asi:\n\n- #setcurrency + <nueva_moneda>`)
+  if (!text) return m.reply(`👑 Formato erróneo. Cambia mi moneda asi:\n\n- #setcurrency + <nueva_moneda>`)
 
   const senderNumber = m.sender.replace(/[^0-9]/g, '')
   const botPath = path.join('./JadiBots', senderNumber)
