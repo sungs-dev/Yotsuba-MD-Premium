@@ -92,7 +92,7 @@ let handler = async (m, { conn, args }) => {
       },
       externalAdReply: {
         title: nombreBot,
-        body: nombreBot : textbot,
+        body: textbot,
         mediaType: 1,
         mediaUrl: redes,
         sourceUrl: redes,
