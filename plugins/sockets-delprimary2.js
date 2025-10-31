@@ -38,6 +38,6 @@ let handler = async (m, { conn, text }) => {
 
 handler.help = ['delprimary <IDgrupoxxxx@g.us>']
 handler.tags = ['serbot']
-handler.command = ['delprimary']
+handler.command = ['delprimary2']
 
 export default handler
