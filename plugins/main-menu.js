@@ -45,7 +45,7 @@ let handler = async (m, { conn }) => {
   const currency = cfg.currency || 'Coins'
   const bannerUrl = cfg.banner || 'https://qu.ax/zRNgk.jpg'
 
-  // thumbnail para externalAdReply (pequeño)
+  // thumbnail para externalAdReply (intentar descargar)
   let thumbnail = null
   try {
     const res = await fetch(bannerUrl)
@@ -151,7 +151,6 @@ let handler = async (m, { conn }) => {
        *➪  𝗗𝗘*
            *➪ 𝗖𝗢𝗠𝗔𝗡𝗗𝗢𝗦*
 
-
 *꒰⌢◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸ ✎ ꒱ 𐔌 HERRAMIENTAS 𐦯*
 > *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #pinterest <texto>*
 > *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #play <musica>*
@@ -245,7 +244,7 @@ let handler = async (m, { conn }) => {
         thumbnail,
         showAdAttribution: false,
         containsAutoReply: true,
-        renderLargerThumbnail: false // thumbnail pequeño en cuadro
+        renderLargerThumbnail: true // thumbnail grande (como enlace)
       }
     }
   }, { quoted: m })
