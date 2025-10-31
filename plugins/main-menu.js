@@ -123,7 +123,7 @@ let handler = async (m, { conn }) => {
 
   // construir texto según el template proporcionado
   let txt = `
-𝐇𝐨𝐥𝐚 @${userId.split('@')[0]}, Soy *${nombreBot}*
+¡𝐇𝐨𝐥𝐚! Soy *${nombreBot}*
 
 > ꒰⌢ ʚ˚₊‧ ✎ ꒱ INFO:
 - ${nombreBot} es un bot privado, el cual el bot principal no se unirá a tus grupos. Si quieres tener el bot en tu grupo tienes que ser Sub-Bot con *(#code)*
