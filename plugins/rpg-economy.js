@@ -231,7 +231,7 @@ let handler = async (m, { conn, text = '', usedPrefix = '#', command = '' }) => 
           return sendAsChannel(m.chat, { text: `👑 Le robaste ${stolen} Exp a @${target.split('@')[0]}`, mentions: [target] }, { quoted: m })
         } else {
           const stolen = victim.money || 0
-          if (!stolen) return sendAsChannel(m.chat, { text: '👑 Esta persona no tiene monedas que robar.' }, { quoted: m })
+          if (!stolen) return sendAsChannel(m.chat, { text: '👑 Esta persona no tiene ${currency} para robarselo.' }, { quoted: m })
           victim.money = 0
           u.money = (u.money || 0) + stolen
           u.lastRob2 = now
