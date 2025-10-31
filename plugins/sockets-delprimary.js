@@ -29,7 +29,6 @@ const handler = async (m, { conn, usedPrefix }) => {
 handler.help = ['delprimary']
 handler.tags = ['grupo']
 handler.command = ['delprimary']
-handler.group = true
 handler.admin = true  
 
 export default handler
