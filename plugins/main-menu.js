@@ -2,33 +2,32 @@ import fs from 'fs'
 import { join } from 'path'
 import fetch from 'node-fetch'
 
-/**
- * Main menu adaptado:
- * - lee nombre/banner/currency por sesión: ./JadiBots/<botid>/config.json
- * - muestra info del usuario tomada de global.db.data.users (money, bank, exp, level)
- * - uptime y ping
- * - mensaje enviado "como si viniera del canal" (forwardedNewsletter + externalAdReply)
- * - thumbnail render pequeño (renderLargerThumbnail: false)
- *
- * Usa: #menu / #menú / #help
- */
-
-// formatea ms a HH:MM:SS
-const formatClock = (ms) => {
+const pad = v => String(v).padStart(2, '0')
+const formatClock = ms => {
   if (typeof ms !== 'number' || isNaN(ms)) return '00:00:00'
-  const totalSeconds = Math.floor(ms / 1000)
-  const hours = Math.floor(totalSeconds / 3600)
-  const minutes = Math.floor((totalSeconds % 3600) / 60)
-  const seconds = totalSeconds % 60
-  return [hours, minutes, seconds].map(v => String(v).padStart(2, '0')).join(':')
+  const total = Math.floor(ms / 1000)
+  const h = Math.floor(total / 3600)
+  const m = Math.floor((total % 3600) / 60)
+  const s = total % 60
+  return `${pad(h)}:${pad(m)}:${pad(s)}`
 }
-
-// formatea ms a readable ping
-const formatPing = (ms) => {
+const formatPing = ms => {
   if (typeof ms !== 'number' || isNaN(ms)) return '0ms'
   if (ms < 1000) return `${ms} ms`
   if (ms < 60_000) return `${(ms / 1000).toFixed(2)} s`
   return `${(ms / 60000).toFixed(2)} m`
+}
+
+const readSessionConfig = (conn) => {
+  try {
+    const botId = conn.user?.jid?.split('@')[0]?.replace(/\D/g, '')
+    if (!botId) return {}
+    const configPath = join('./JadiBots', botId, 'config.json')
+    if (!fs.existsSync(configPath)) return {}
+    return JSON.parse(fs.readFileSync(configPath))
+  } catch (e) {
+    return {}
+  }
 }
 
 const ensureDB = () => {
@@ -37,107 +36,65 @@ const ensureDB = () => {
   if (!global.db.data.users) global.db.data.users = {}
 }
 
-const ensureUser = (jid) => {
+let handler = async (m, { conn }) => {
   ensureDB()
-  if (!global.db.data.users[jid]) {
-    global.db.data.users[jid] = {
-      exp: 0,
-      money: 0,
-      bank: 0,
-      level: 1,
-      // cooldowns etc si los usas en otros plugins
-      lastDaily: 0,
-      lastCofre: 0,
-      lastMinar: 0,
-      lastRob: 0,
-      lastRob2: 0
-    }
-  }
-  return global.db.data.users[jid]
-}
 
-const readSessionConfig = (conn) => {
-  try {
-    const botActual = conn.user?.jid?.split('@')[0]?.replace(/\D/g, '')
-    const configPath = join('./JadiBots', botActual || '', 'config.json')
-    if (botActual && fs.existsSync(configPath)) {
-      const cfg = JSON.parse(fs.readFileSync(configPath))
-      return { cfg, configPath, botActual }
-    }
-  } catch (e) { /* ignore */ }
-  return { cfg: {}, configPath: null, botActual: null }
-}
+  // lectura de config de sesión (JadiBots/<botId>/config.json)
+  const cfg = readSessionConfig(conn)
+  const nombreBot = cfg.name || cfg.currency || cfg?.botname || 'Yotsuba Nakano' // prefer name, fallback currency or botname
+  const currency = cfg.currency || 'Coins'
+  const bannerUrl = cfg.banner || 'https://qu.ax/zRNgk.jpg'
 
-const getThumbnailBuffer = async (url) => {
+  // thumbnail para externalAdReply (pequeño)
+  let thumbnail = null
   try {
-    if (!url) return null
-    const res = await fetch(url)
-    if (!res.ok) return null
-    return await res.buffer()
+    const res = await fetch(bannerUrl)
+    thumbnail = await res.buffer()
   } catch (e) {
-    return null
+    thumbnail = null
   }
-}
 
-let handler = async (m, { conn, args }) => {
-  ensureDB()
-
-  // sesión/config de este bot (la sesión que ejecuta este handler)
-  const { cfg } = readSessionConfig(conn)
-  const nombreBot = cfg?.name || 'Yotsuba Nakano'
-  const bannerFinal = cfg?.banner || 'https://qu.ax/zRNgk.jpg'
-  const currency = cfg?.currency || 'Coins'
-
-  // totals
-  const totalreg = Object.keys(global.db.data.users || {}).length
-
-  // uptime: prefer conn.uptime si está, si no process.uptime
+  // uptime
   let uptimeMs = 0
   try {
-    if (conn?.uptime && typeof conn.uptime === 'number') uptimeMs = conn.uptime
+    if (conn?.uptime) uptimeMs = conn.uptime
     else if (typeof process !== 'undefined' && process.uptime) uptimeMs = Math.floor(process.uptime() * 1000)
     else uptimeMs = 0
   } catch (e) { uptimeMs = 0 }
   const uptime = formatClock(uptimeMs)
 
-  // ping aproximado desde timestamp del mensaje
+  // ping aproximado (desde timestamp del mensaje)
   let msgTimestamp = 0
   if (m?.messageTimestamp) msgTimestamp = m.messageTimestamp * 1000
   else if (m?.message?.timestamp) msgTimestamp = m.message.timestamp * 1000
   else if (m?.key?.t) msgTimestamp = m.key.t * 1000
   else msgTimestamp = Date.now()
-  const pingMs = Date.now() - msgTimestamp
-  const p = formatPing(pingMs)
+  const p = formatPing(Date.now() - msgTimestamp)
 
-  // Usuario objetivo (mencionado o quien ejecuta)
-  const mentionedJid = (m.mentionedJid && m.mentionedJid.length) ? m.mentionedJid[0] : m.sender
-  const userId = mentionedJid || m.sender
+  // total de usuarios en db
+  const totalreg = Object.keys(global.db.data.users).length
 
-  // asegúrate que existe registro del user
-  const userData = ensureUser(userId)
+  // username del que invoca
+  let username = m.pushName || m.name || m.sender.split('@')[0]
+  try { username = await conn.getName(m.sender) || username } catch (e) {}
 
-  // obtener nombre legible del usuario (si la conexión lo soporta)
-  let userName = userId.split('@')[0]
-  try {
-    if (typeof conn.getName === 'function') {
-      const n = await conn.getName(userId)
-      if (n) userName = n
-    } else if (conn.contacts && conn.contacts[userId] && conn.contacts[userId].name) {
-      userName = conn.contacts[userId].name
-    }
-  } catch (e) { /* ignore */ }
+  // obtener stats del usuario desde la DB
+  const user = global.db.data.users[m.sender] || { money: 0, exp: 0, level: 1 }
+  const userMoney = user.money || 0
+  const userExp = user.exp || 0
+  const userLevel = user.level || 1
 
-  // calcular rango (según si es admin en el grupo)
+  // rango según si es admin en el grupo (si aplica)
   let rango = 'Súbdito'
   try {
     if (m.isGroup) {
       const meta = await conn.groupMetadata(m.chat)
-      const participant = meta.participants.find(p => p.id === userId)
+      const participant = meta.participants.find(p => p.id === m.sender)
       if (participant && (participant.admin || participant.isAdmin)) rango = 'Aprendiz'
     }
-  } catch (e) { /* ignore */ }
+  } catch (e) {}
 
-  // calcular posición/top en este grupo (por total monedas: money + bank)
+  // calcular posicion en el top del grupo (solo si es grupo)
   let rankText = 'N/A'
   try {
     if (m.isGroup) {
@@ -145,28 +102,31 @@ let handler = async (m, { conn, args }) => {
       const groupJids = meta.participants.map(p => p.id)
       const arr = Object.keys(global.db.data.users)
         .filter(jid => groupJids.includes(jid))
-        .map(jid => ({ jid, total: (global.db.data.users[jid].money || 0)].bank || 0) }))
+        .map(jid => {
+          const u = global.db.data.users[jid] || {}
+          return { jid, total: (u.money || 0) + (u.bank || 0) }
+        })
         .sort((a, b) => b.total - a.total)
-      const idx = arr.findIndex(x => x.jid === userId)
+      const idx = arr.findIndex(x => x.jid === m.sender)
       rankText = idx >= 0 ? String(idx + 1) : 'N/A'
     } else {
       const arr = Object.keys(global.db.data.users)
-        .map(jid => ({ jid, total: (global.db.data.users[jid].money || 0) + (global.db.data.users[jid].bank || 0) }))
+        .map(jid => {
+          const u = global.db.data.users[jid] || {}
+          return { jid, total: (u.money || 0) + (u.bank || 0) }
+        })
         .sort((a, b) => b.total - a.total)
-      const idx = arr.findIndex(x => x.jid === userId)
+      const idx = arr.findIndex(x => x.jid === m.sender)
       rankText = idx >= 0 ? String(idx + 1) : 'N/A'
     }
   } catch (e) { rankText = 'N/A' }
 
-  // preparar thumbnail pequeño
-  const thumbnail = await getThumbnailBuffer(bannerFinal).catch(() => null)
-
-  // construir texto del menú usando la plantilla que diste
-  const txt = `
+  // construir texto según el template proporcionado
+  let txt = `
 𝐇𝐨𝐥𝐚, Soy *${nombreBot}*
 
 > ꒰⌢ ʚ˚₊‧ ✎ ꒱ INFO:
-- *${nombreBot}* es un bot privado, el cual el bot principal no se unirá a tus grupos. Si quieres tener el bot en tu grupo tienes que ser Sub-Bot con *(#code)*
+- ${nombreBot} es un bot privado, el cual el bot principal no se unirá a tus grupos. Si quieres tener el bot en tu grupo tienes que ser Sub-Bot con *(#code)*
 > ꒰⌢ ʚ˚₊‧ ✎ ꒱ ❐ ʚ˚₊‧ʚ˚₊‧ʚ˚
 
 *╭╼𝅄꒰𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ꒱ 𐔌 BOT - INFO 𐦯*
@@ -175,16 +135,16 @@ let handler = async (m, { conn, args }) => {
 *|✎ Uptime:* ${uptime}
 *|✎ Ping:* ${p}
 *|✎ Baileys:* PixelCrew-Bails
-*╰─ׅ─ׅ┈─๋︩︪─╯*
+*╰─ׅ─ׅ┈─๋︩︪─☪︎︎︎̸─╯*
 
 
 *╭╼𝅄꒰𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ꒱ 𐔌 INFO - USER 𐦯*
-*|✎ Nombre:* ${userName}
-*|✎ ${currency}:* ${ (userData.money || 0) }
-*|✎ Exp:* ${ (userData.exp || 0) }
+*|✎ Nombre:* ${username}
+*|✎ ${currency}:* ${userMoney}
+*|✎ Exp:* ${userExp}
 *|✎ Rango:* ${rango}
-*|✎ Nivel:* ${ (userData.level || 1) }
-*╰─ׅ─ׅ┈─๋︩︪─☪︎︎︎̸⃘࣭ٜ࣪࣪࣪۬◌⃘۪֟፝֯۫۫︎⃪𐇽۫۬👑⃘⃪۪֟፝֯۫۫۫۬◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸─ׅ─ׅ┈─๋︩︪─╯*
+*|✎ Nivel:* ${userLevel}
+*╰─ׅ─ׅ┈─๋︩︪─☪︎︎︎̸─╯*
 
 
 *➪ 𝗟𝗜𝗦𝗧𝗔*
@@ -259,29 +219,31 @@ let handler = async (m, { conn, args }) => {
 > *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #autoadmin*
 > *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #join*
 *╰─ׅ─ׅ┈─๋︩︪─☪︎︎︎̸⃘࣭ٜ࣪࣪࣪۬◌⃘۪֟፝֯۫۫︎⃪𐇽۫۬👑⃘⃪۪֟፝֯۫۫۫۬◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸─ׅ─ׅ┈─๋︩︪─╯*
+`.trim()
 
-> ✰ 𝐃𝐞𝐬𝐜𝐨𝐧𝐨𝐜𝐢𝐝𝐨 𝐗𝐳𝐬𝐲 (•̀ᴗ•́)و`.trim()
+  // mentions: mencionar al usuario que abrió el menú (opc.)
+  const mentions = [m.sender]
 
-  await conn.sendMessage(m.chat, { 
+  await conn.sendMessage(m.chat, {
     text: txt,
     contextInfo: {
-      mentionedJid: [userId],
+      mentionedJid: mentions,
       isForwarded: true,
       forwardedNewsletterMessageInfo: {
-        newsletterJid: channelRD?.id || '',
+        newsletterJid: global.channelRD?.id || '',
         serverMessageId: '',
-        newsletterName: channelRD?.name || ''
+        newsletterName: global.channelRD?.name || ''
       },
       externalAdReply: {
         title: nombreBot,
-        body: textbot || '',
+        body: global.textbot || '',
         mediaType: 1,
-        mediaUrl: redes || '',
-        sourceUrl: redes || '',
-        thumbnail: await (await fetch(bannerFinal)).buffer().catch(()=>null),
+        mediaUrl: global.redes || '',
+        sourceUrl: global.redes || '',
+        thumbnail,
         showAdAttribution: false,
         containsAutoReply: true,
-        renderLargerThumbnail: true
+        renderLargerThumbnail: false // thumbnail pequeño en cuadro
       }
     }
   }, { quoted: m })
