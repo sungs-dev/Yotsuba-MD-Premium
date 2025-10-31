@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 
 const handler = async (m, { conn, text, usedPrefix, command }) => {
-  if (!text) return m.reply(`👑 Formato erróneo. Cambia mi currency asi:\n\n- #setcurrency + <nueva_moneda>`)
+  if (!text) return m.reply(`👑 Formato erróneo. Cambia mi currency asi:\n\n- #setcurrency + *<nueva_moneda>*`)
 
   const senderNumber = m.sender.replace(/[^0-9]/g, '')
   const botPath = path.join('./JadiBots', senderNumber)
@@ -27,16 +27,16 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
   try {
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2))
-    m.reply(`💜 La currency de tu session fue actualizada a *${text.trim()}*`)
+    m.reply(`💜 La *moneda* de tu session fue actualizada a *${text.trim()}*`)
   } catch (err) {
     console.error(err)
-    m.reply('😔 Ocurrió un error al guardar la currency.')
+    m.reply('*😔 Ocurrió un error al guardar la currency.*')
   }
 }
 
 handler.help = ['setcurrency']
 handler.tags = ['sockets']
-handler.command = /^setcurrency$/i
+handler.command = ['setcurrency', 'setmoneda']
 handler.owner = true // solo el dueño puede usar esto
 
 export default handler
