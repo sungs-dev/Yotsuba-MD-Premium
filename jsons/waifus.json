@@ -1,12 +1,12 @@
+{
+  "58025974": {
+    "name": "Unknown Collection",
+    "characters": [
       {
         "id": "557376",
         "name": "Hiryute Tione",
         "gender": "Mujer",
-        "tags": ["tione_hiryute"],
-        "value": 100
-      },
-      {
-        "id": "969449",
+        "tags": ["tione_hiry "id": "969449",
         "name": "Hiryute Tiona",
         "gender": "Mujer",
         "tags": ["tiona_hiryute"],
@@ -152,7 +152,7 @@
         "tags": ["chloe_rollo"],
         "value": 100
       }
-   ]
+    ]
   },
   "58025975": {
     "name": "Fuufu Ijou, Koibito Miman",
@@ -253,6 +253,7 @@
         "tags": ["louis_miller"],
         "value": 100
       }
+    ]
   },
   "61213558": {
     "name": "Overflow",
@@ -308,31 +309,7 @@
         "id": "164976",
         "name": "Yelena Yerin",
         "gender": "Mujer",
-        "tags": ["yelena_yerin"],
-        "value": 100
-      },
-      {
-        "id": "778843",
-        "name": "Emma Kim",
-        "gender": "Mujer",
-        "tags": ["emma_kim"],
-        "value": 100
-      },
-      {
-        "id": "819553",
-        "name": "Gina Baek",
-        "gender": "Mujer",
-        "tags": ["gina_baek"],
-        "value": 100
-      }
-    ]
-  },
-  "65341498": {
-    "name": "Ane Wa Yanmama Junyuu-chuu",
-    "characters": [
-      {
-        "id": "647394",
-        "name": "Aika Sano",
+        "tagsname": "Aika Sano",
         "gender": "Mujer",
         "tags": ["sano_aika"],
         "value": 100
@@ -451,7 +428,10 @@
   },
   "66766530": {
     "name": "Tensei Shitara Dainana Ouji Datta Node, Kimama Ni Majutsu Wo Kiwamemasu",
-    "tags": ["Me reencarné como el 7º Príncipe para poder tomarme mi tiempo para perfeccionar mi habilidad mágica", "I Was Reincarnated as the 7th Prince so I Can Take My Time Perfecting My Magical Ability"],
+    "tags": [
+      "Me reencarné como el 7º Príncipe para poder tomarme mi tiempo para perfeccionar mi habilidad mágica",
+      "I Was Reincarnated as the 7th Prince so I Can Take My Time Perfecting My Magical Ability"
+    ],
     "characters": [
       {
         "id": "491747",
@@ -534,6 +514,7 @@
         "gender": "Mujer",
         "tags": ["vanessa_enoteca"],
         "value": 100
-      },
-      {
+      }
     ]
+  }
+}
