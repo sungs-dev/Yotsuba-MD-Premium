@@ -1,9 +1,18 @@
+import fs from 'fs'
+import path from 'path'
+
 const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin }) => {
+  // rcanal placeholder (si tu entorno define otro contexto, lo puedes eliminar)
+  const rcanal = {}
+
   const primaryBot = global.db.data.chats[m.chat].primaryBot
   if (primaryBot && conn.user.jid !== primaryBot) throw !1
   const chat = global.db.data.chats[m.chat]
   let type = command.toLowerCase()
-  let isEnable = chat[type] !== undefined ? chat[type] : false
+  // Por defecto detect = true, resto false si no está definido
+  let isEnable = (chat[type] !== undefined)
+    ? chat[type]
+    : (type === 'detect' ? true : false)
 
   switch (type) {
     case 'welcome':
@@ -33,6 +42,25 @@ const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin })
       chat.antiLink = isEnable
       break
     }
+    case 'detect':
+    case 'alertas': {
+      // Si se ejecuta en privado sólo el owner puede cambiarlo
+      if (!m.isGroup) {
+        if (!isOwner) {
+          global.dfail('group', m, conn)
+          throw false
+        }
+      } else {
+        // Si es grupo, sólo admins pueden cambiarlo
+        if (!isAdmin) {
+          global.dfail('admin', m, conn)
+          throw false
+        }
+      }
+      // Dejar chat.detect igual al valor actual (se actualizará más abajo según args)
+      chat.detect = isEnable
+      break
+    }
   }
 
   if (args[0] === 'on' || args[0] === 'enable') {
@@ -48,13 +76,16 @@ const handler = async (m, { conn, usedPrefix, command, args, isOwner, isAdmin })
       m, rcanal
     )
   }
+
+  // Guardar el nuevo estado en la propiedad correspondiente
   chat[type] = isEnable
+
   conn.reply(m.chat, `🙈 La función *${type}* fue *${isEnable ? 'activada' : 'desactivada'}* para este grupo.`, m, rcanal)
 }
 
-handler.help = ['welcome', 'bienvenida', 'modoadmin', 'onlyadmin', 'antilink', 'antienlace']
+handler.help = ['welcome', 'bienvenida', 'modoadmin', 'onlyadmin', 'antilink', 'antienlace', 'detect', 'alertas']
 handler.tags = ['nable']
-handler.command = ['welcome', 'bienvenida', 'modoadmin', 'onlyadmin', 'antilink', 'antienlace']
+handler.command = ['welcome', 'bienvenida', 'modoadmin', 'onlyadmin', 'antilink', 'antienlace', 'detect', 'alertas']
 handler.group = true
 
 export default handler
