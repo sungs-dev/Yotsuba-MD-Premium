@@ -103,5 +103,6 @@ conn.sendMessage(m.chat, { text: `😿 Error: ${e.message}` }, { quoted: m })
 handler.tags = ['sticker']
 handler.help = ['brat', 'bratv', 'emojimix', 'qc', 'take', 'robar', 'wm']
 handler.command = ['brat', 'bratv', 'emojimix', 'qc', 'take', 'wm']
+handler.group = true
 
 export default handler
