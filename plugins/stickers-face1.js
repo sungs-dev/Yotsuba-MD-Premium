@@ -22,7 +22,7 @@ let handler = async (m, { conn, args }) => {
   let userId = m.sender
   let packstickers = global.db.data.users[userId] || {}
   // texto1: pack name (fallback to global)
-  let texto1 = packstickers.text1 || global.packsticker || '⊹ 🐬 Deymoon🧠 Club\n↳ Deymoon.club\n\n👹 Info:\n deymoon-club.vercel.app'
+  let texto1 = packstickers.text1 || global.packsticker || 'Sticker'
   // determine nombreBot from session config or global
   const cfg = readSessionConfig(conn)
   const nombreBot = cfg?.name || global.botname || cfg?.currency || 'Bot'
