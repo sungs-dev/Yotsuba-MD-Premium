@@ -104,27 +104,27 @@ let handler = async (m, { conn, command, args }) => {
       const remaining = claimCooldowns[userId] - now
       const minutes = Math.floor(remaining / 60000)
       const seconds = Math.floor((remaining % 60000) / 1000)
-      return conn.reply(m.chat, `⏳ Debes esperar *${minutes}m ${seconds}s* antes de reclamar otra waifu.`, m)
+      return conn.reply(m.chat, `💜 Espera *${minutes} minutos y ${seconds} segundos* para volver a reclamar una waifu.`, m, rcanal)
     }
 
     if (!m.quoted || !m.quoted.text) {
-      return conn.reply(m.chat, '《✧》Debes *citar un personaje válido* para reclamarlo.', m)
+      return conn.reply(m.chat, '*👑 Cita un personaje válido.*', m, rcanal)
     }
 
     try {
       const characters = await loadCharacters()
       const match = m.quoted.text.match(/𝙄𝘿:\s*\*([^\*]+)\*/i)
-      if (!match) return conn.reply(m.chat, '《✧》No se pudo detectar el ID del personaje.', m)
+      if (!match) return conn.reply(m.chat, '💜 No encontré el *ID* de ese personaje.', m, rcanal)
 
       const id = match[1].trim()
       const character = characters.find(c => String(c.id) === String(id))
-      if (!character) return conn.reply(m.chat, '《✧》Personaje no encontrado.', m)
+      if (!character) return conn.reply(m.chat, '👑 el Personaje *no fue encontrado.*', m, rcanal)
 
       if (character.user && character.user !== userId) {
         return conn.reply(
           m.chat,
-          `✧ El personaje *${character.name}* ya fue reclamado por @${character.user.split('@')[0]}.`,
-          m,
+          `💜 El personaje *${character.name}* ya fue reclamado por @${character.user.split('@')[0]}.`,
+          m, rcanal,
           { mentions: [character.user] }
         )
       }
@@ -142,7 +142,7 @@ let handler = async (m, { conn, command, args }) => {
       await conn.reply(m.chat, mensajeFinal, m)
       claimCooldowns[userId] = now + cd
     } catch (e) {
-      await conn.reply(m.chat, `✘ Error al reclamar waifu:\n${e?.message || e}`, m)
+      await conn.reply(m.chat, `😿 Error:\n${e?.message || e}`, m, rcanal)
     }
     return
   }
@@ -159,18 +159,18 @@ let handler = async (m, { conn, command, args }) => {
       personajes = await loadCharacters()
       if (!Array.isArray(ventas) || !Array.isArray(personajes)) throw new Error('Error en la estructura de los archivos.')
     } catch (e) {
-      return conn.reply(m.chat, `✘ Error al leer los datos.\n*Detalles:* ${e.message}`, m)
+      return conn.reply(m.chat, `😿 Error al leer los datos.\n*Detalles:* ${e.message}`, m, rcanal)
     }
 
     if (!ventas.length) {
-      return conn.reply(m.chat, '✿ Actualmente no hay waifus en venta.', m)
+      return conn.reply(m.chat, '💜 Actualmente no hay waifus en venta.', m, rcanal)
     }
 
     const pageArg = parseInt(args[0]) || 1
     const pageSize = 10
     const totalPages = Math.ceil(ventas.length / pageSize)
     if (pageArg < 1 || pageArg > totalPages) {
-      return conn.reply(m.chat, `✘ Página inválida. Hay *${totalPages}* página(s) disponibles.`, m)
+      return conn.reply(m.chat, `🤨 Página inválida. Hay *${totalPages}* página(s) disponibles.`, m, rcanal)
     }
 
     const inicio = (pageArg - 1) * pageSize
@@ -212,7 +212,7 @@ let handler = async (m, { conn, command, args }) => {
     try {
       await conn.sendMessage(m.chat, { text: texto, mentions: mencionados }, { quoted: m })
     } catch (err) {
-      return conn.reply(m.chat, `✘ Error al enviar la lista:\n${err?.message || err}`, m)
+      return conn.reply(m.chat, `😿 Error:\n${err?.message || err}`, m, rcanal)
     }
     return
   }
@@ -229,7 +229,7 @@ let handler = async (m, { conn, command, args }) => {
       const remainingTime = Math.ceil((rollCooldowns[userId] - now) / 1000)
       const minutes = Math.floor(remainingTime / 60)
       const seconds = remainingTime % 60
-      return conn.reply(m.chat, `( ⸝⸝･̆⤚･̆⸝⸝) ¡𝗗𝗲𝗯𝗲𝘀 𝗲𝘀𝗽𝗲𝗿𝗮𝗿 *${minutes} minutos y ${seconds} segundos* 𝗽𝗮𝗿𝗮 𝘃𝗼𝗹𝘃𝗲𝗿  𝘂𝘀𝗮𝗿 *#rw* 𝗱𝗲 𝗻𝘂𝗲𝘃𝗼.`, m)
+      return conn.reply(m.chat, `💜 Espera *${minutes} minutos y ${seconds} segundos* para volver a usar el comando *rw*`, m, rcanal)
     }
 
     try {
