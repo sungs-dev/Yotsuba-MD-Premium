@@ -175,7 +175,7 @@ let handler = async (m, { conn, command, args }) => {
 
     const inicio = (pageArg - 1) * pageSize
     const waifusPagina = ventas.slice(inicio, inicio + pageSize)
-    let texto = `◢✿ *Waifus en venta* ✿◤\n\n`
+    let texto = `*☆ HaremShop ≧◠ᴥ◠≦*\n❏ Personajes en venta:\n\n`
     const mencionados = []
 
     for (let i = 0; i < waifusPagina.length; i++) {
@@ -195,10 +195,7 @@ let handler = async (m, { conn, command, args }) => {
         texto += `✰ ${inicio + i + 1} » *${name}* (*${valorOriginal.toLocaleString()}*)\n`
         // use m.moneda if present else global.currency
         const moneda = (m && m.moneda) ? m.moneda : (global.currency || 'Coins')
-        texto += `  🛒 Precio de venta: *¥${(precio || 0).toLocaleString()} ${moneda}*\n`
-        texto += `  🆔 ID: *${idPersonaje}*\n`
-        texto += `  👤 Vendedor: ${username}\n`
-        texto += `  📅 Publicado: ${formatFecha(fecha)}\n\n`
+        texto += `❀ *${inicio + i + 1} » ${name}* (*${valorOriginal.toLocaleString()})*\n   ⛁ Precio » *¥${(precio || 0).toLocaleString()}* Coins\n   ❖ Vendedor  » *${username}*\n   ✿ ID » *${idPersonaje}*\n\n`
 
         if (vendedor) mencionados.push(vendedor)
       } catch (err) {
@@ -206,7 +203,7 @@ let handler = async (m, { conn, command, args }) => {
       }
     }
 
-    texto += `> Página *${pageArg}* de *${totalPages}*\n`
+    texto += `> • Página *${pageArg}* de *${totalPages}*\n`
     if (pageArg < totalPages) texto += `> Usa *#haremshop ${pageArg + 1}* para ver la siguiente página.\n`
 
     try {
