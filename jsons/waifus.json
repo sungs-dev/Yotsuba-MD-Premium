@@ -1,520 +1,59 @@
 {
-  "58025974": {
-    "name": "Unknown Collection",
-    "characters": [
-      {
-        "id": "557376",
-        "name": "Hiryute Tione",
-        "gender": "Mujer",
-        "tags": ["tione_hiry "id": "969449",
-        "name": "Hiryute Tiona",
-        "gender": "Mujer",
-        "tags": ["tiona_hiryute"],
-        "value": 100
-      },
-      {
-        "id": "779673",
-        "name": "Alf Ljos Riveria",
-        "gender": "Mujer",
-        "tags": ["riveria_ljos_alf"],
-        "value": 100
-      },
-      {
-        "id": "599005",
-        "name": "Teasanare Airmid",
-        "gender": "Mujer",
-        "tags": ["airmid_teasanare"],
-        "value": 100
-      },
-      {
-        "id": "754484",
-        "name": "Hitachi Chigusa",
-        "gender": "Mujer",
-        "tags": ["chigusa_hitachi"],
-        "value": 100
-      },
-      {
-        "id": "986351",
-        "name": "Wallenstein Aiz",
-        "gender": "Mujer",
-        "tags": ["aiz_wallenstein"],
-        "value": 100
-      },
-      {
-        "id": "572533",
-        "name": "Bell Cranel",
-        "gender": "Hombre",
-        "tags": ["bell_cranel"],
-        "value": 100
-      },
-      {
-        "id": "870433",
-        "name": "Crozzo Welf",
-        "gender": "Hombre",
-        "tags": ["welf_crozzo"],
-        "value": 100
-      },
-      {
-        "id": "150628",
-        "name": "Loga Bete",
-        "gender": "Hombre",
-        "tags": ["bete_loga"],
-        "value": 100
-      },
-      {
-        "id": "460395",
-        "name": "Landrock Gareth",
-        "gender": "Hombre",
-        "tags": ["gareth_landrock"],
-        "value": 100
-      },
-      {
-        "id": "137763",
-        "name": "Hermes",
-        "gender": "Hombre",
-        "tags": ["hermes_(danmachi)"],
-        "value": 100
-      },
-      {
-        "id": "855121",
-        "name": "Demeter",
-        "gender": "Hombre",
-        "tags": ["demeter_(danmachi)"],
-        "value": 100
-      },
-      {
-        "id": "804774",
-        "name": "Lion Ryu",
-        "gender": "Mujer",
-        "tags": ["ryu_lion"],
-        "value": 100
-      },
-      {
-        "id": "119128",
-        "name": "Hephaistos",
-        "gender": "Mujer",
-        "tags": ["hephaistos_(danmachi)"],
-        "value": 100
-      },
-      {
-        "id": "564115",
-        "name": "Artemis",
-        "gender": "Mujer",
-        "tags": ["artemis_(danmachi)"],
-        "value": 100
-      },
-      {
-        "id": "104093",
-        "name": "Loki",
-        "gender": "Mujer",
-        "tags": ["loki_(danmachi)"],
-        "value": 100
-      },
-      {
-        "id": "560392",
-        "name": "Deimne Finn",
-        "gender": "Hombre",
-        "tags": ["finn_deimne"],
-        "value": 100
-      },
-      {
-        "id": "274994",
-        "name": "Ottarl",
-        "gender": "Hombre",
-        "tags": ["ottarl"],
-        "value": 100
-      },
-      {
-        "id": "645540",
-        "name": "Lyd",
-        "gender": "Hombre",
-        "tags": ["lyd_(danmachi)"],
-        "value": 100
-      },
-      {
-        "id": "279334",
-        "name": "Ouka Kashima",
-        "gender": "Hombre",
-        "tags": ["kashima_ouka"],
-        "value": 100
-      },
-      {
-        "id": "436453",
-        "name": "Ganesha",
-        "gender": "Hombre",
-        "tags": ["ganesha_(danmachi)"],
-        "value": 100
-      },
-      {
-        "id": "334326",
-        "name": "Rollo Chloe",
-        "gender": "Mujer",
-        "tags": ["chloe_rollo"],
-        "value": 100
-      }
-    ]
+    "id": 1,
+    "nombre": "Makima",
+    "foto": "https://raw.githubusercontent.com/IrokzDal/uploads/main/1759791875520.jpeg",
+    "estado": "Libre"
   },
-  "58025975": {
-    "name": "Fuufu Ijou, Koibito Miman",
-    "characters": [
-      {
-        "id": "365521",
-        "name": "Akari Watanabe",
-        "gender": "Mujer",
-        "tags": ["watanabe_akari"],
-        "value": 100
-      },
-      {
-        "id": "972455",
-        "name": "Shiori Sakurazaka",
-        "gender": "Mujer",
-        "tags": ["sakurazaka_shiori"],
-        "value": 100
-      },
-      {
-        "id": "315624",
-        "name": "Minami Tenjin",
-        "gender": "Mujer",
-        "tags": ["tenjin_minami"],
-        "value": 100
-      },
-      {
-        "id": "592093",
-        "name": "Jirou Yakuin",
-        "gender": "Hombre",
-        "tags": ["yakuin_jirou"],
-        "value": 100
-      }
-    ]
+  {
+    "id": 2,
+    "nombre": "Chaisaw Man",
+    "foto": "https://qu.ax/ltPVv.jpg",
+    "estado": "Libre"
   },
-  "58353950": {
-    "name": "Silent Witch Chinmoku No Majo No Kakushigoto",
-    "characters": [
-      {
-        "id": "328639",
-        "name": "Everett Monica",
-        "gender": "Mujer",
-        "tags": ["monica_everett"],
-        "value": 100
-      },
-      {
-        "id": "265431",
-        "name": "Norton Isabelle",
-        "gender": "Mujer",
-        "tags": ["isabelle_norton"],
-        "value": 100
-      },
-      {
-        "id": "501050",
-        "name": "Colette Lana",
-        "gender": "Mujer",
-        "tags": ["lana_colette"],
-        "value": 100
-      },
-      {
-        "id": "988248",
-        "name": "Ashley Claudia",
-        "gender": "Mujer",
-        "tags": ["claudia_ashley"],
-        "value": 100
-      },
-      {
-        "id": "447456",
-        "name": "Grove Casey",
-        "gender": "Mujer",
-        "tags": ["casey_grove"],
-        "value": 100
-      },
-      {
-        "id": "720660",
-        "name": "Nero",
-        "gender": "Hombre",
-        "tags": ["nero_(silent_witch)"],
-        "value": 100
-      },
-      {
-        "id": "186281",
-        "name": "Ridill Arc Felix",
-        "gender": "Hombre",
-        "tags": ["felix_arc_ridill"],
-        "value": 100
-      },
-      {
-        "id": "149752",
-        "name": "Ashley Cyril",
-        "gender": "Hombre",
-        "tags": ["cyril_ashley"],
-        "value": 100
-      },
-      {
-        "id": "738795",
-        "name": "Miller Louis",
-        "gender": "Hombre",
-        "tags": ["louis_miller"],
-        "value": 100
-      }
-    ]
+  {
+    "id": 3,
+    "nombre": "Tsukasa Yugi",
+    "foto": "https://raw.githubusercontent.com/IrokzDal/uploads/main/1759792063844.jpeg",
+    "estado": "Libre"
   },
-  "61213558": {
-    "name": "Overflow",
-    "characters": [
-      {
-        "id": "794778",
-        "name": "Ayane Shirakawa",
-        "gender": "Mujer",
-        "tags": ["shirakawa_ayane"],
-        "value": 100
-      },
-      {
-        "id": "825030",
-        "name": "Kotone Shirakawa",
-        "gender": "Mujer",
-        "tags": ["shirakawa_kotone"],
-        "value": 100
-      }
-    ]
+  {
+    "id": 4,
+    "nombre": "Hanako San",
+    "foto": "https://raw.githubusercontent.com/IrokzDal/uploads/main/1759792152493.jpeg",
+    "estado": "Libre"
   },
-  "64608476": {
-    "name": "Circles",
-    "characters": [
-      {
-        "id": "336475",
-        "name": "Cloe Park",
-        "gender": "Mujer",
-        "tags": ["cloe_park"],
-        "value": 100
-      },
-      {
-        "id": "205601",
-        "name": "Hanna Lee",
-        "gender": "Mujer",
-        "tags": ["hanna_lee"],
-        "value": 100
-      },
-      {
-        "id": "256040",
-        "name": "Emily Kang",
-        "gender": "Mujer",
-        "tags": ["emily_kang"],
-        "value": 100
-      },
-      {
-        "id": "778782",
-        "name": "Amy Yoo",
-        "gender": "Mujer",
-        "tags": ["amy_yoo"],
-        "value": 100
-      },
-      {
-        "id": "164976",
-        "name": "Yelena Yerin",
-        "gender": "Mujer",
-        "tagsname": "Aika Sano",
-        "gender": "Mujer",
-        "tags": ["sano_aika"],
-        "value": 100
-      },
-      {
-        "id": "287136",
-        "name": "Takuya Sano",
-        "gender": "Hombre",
-        "tags": ["sano_takuya"],
-        "value": 100
-      }
-    ]
+  {
+    "Makima",
+    "foto": "https://qu.ax/SLgti.jpg",
+    "estado": "Libre"
   },
-  "65385855": {
-    "name": "Mahou Shoujo Madoka Magica",
-    "characters": [
-      {
-        "id": "506141",
-        "name": "Madoka Kaname",
-        "gender": "Mujer",
-        "tags": ["kaname_madoka"],
-        "value": 100
-      },
-      {
-        "id": "545984",
-        "name": "Homura Akemi",
-        "gender": "Mujer",
-        "tags": ["akemi_homura"],
-        "value": 100
-      },
-      {
-        "id": "252383",
-        "name": "Mami Tomoe",
-        "gender": "Mujer",
-        "tags": ["tomoe_mami"],
-        "value": 100
-      },
-      {
-        "id": "398318",
-        "name": "Sayaka Miki",
-        "gender": "Mujer",
-        "tags": ["miki_sayaka"],
-        "value": 100
-      },
-      {
-        "id": "924339",
-        "name": "Kyoko Sakura",
-        "gender": "Mujer",
-        "tags": ["sakura_kyoko"],
-        "value": 100
-      },
-      {
-        "id": "937669",
-        "name": "Yachiyo Nanami",
-        "gender": "Mujer",
-        "tags": ["nanami_yachiyo"],
-        "value": 100
-      },
-      {
-        "id": "882907",
-        "name": "Oriko Mikuni",
-        "gender": "Mujer",
-        "tags": ["mikuni_oriko"],
-        "value": 100
-      },
-      {
-        "id": "886510",
-        "name": "Gray Alina",
-        "gender": "Mujer",
-        "tags": ["alina_gray"],
-        "value": 100
-      },
-      {
-        "id": "625617",
-        "name": "Kuroe",
-        "gender": "Mujer",
-        "tags": ["kuroe_(madoka_magica)"],
-        "value": 100
-      },
-      {
-        "id": "663218",
-        "name": "Felicia Mitsuki",
-        "gender": "Mujer",
-        "tags": ["mitsuki_felicia"],
-        "value": 100
-      },
-      {
-        "id": "872890",
-        "name": "Nagisa Momoe",
-        "gender": "Mujer",
-        "tags": ["momoe_nagisa"],
-        "value": 100
-      },
-      {
-        "id": "569724",
-        "name": "Ui Tamaki",
-        "gender": "Mujer",
-        "tags": ["tamaki_ui"],
-        "value": 100
-      },
-      {
-        "id": "594246",
-        "name": "Mel Anna",
-        "gender": "Mujer",
-        "tags": ["anna_mel"],
-        "value": 100
-      },
-      {
-        "id": "225159",
-        "name": "Sana Futaba",
-        "gender": "Mujer",
-        "tags": ["futaba_sana"],
-        "value": 100
-      }
-    ]
+  {
+    "id": 6,
+    "nombre": "Makima",
+    "foto": "https://qu.ax/UzmZj.jpg",
+    "estado": "Libre"
   },
-  "66766530": {
-    "name": "Tensei Shitara Dainana Ouji Datta Node, Kimama Ni Majutsu Wo Kiwamemasu",
-    "tags": [
-      "Me reencarné como el 7º Príncipe para poder tomarme mi tiempo para perfeccionar mi habilidad mágica",
-      "I Was Reincarnated as the 7th Prince so I Can Take My Time Perfecting My Magical Ability"
-    ],
-    "characters": [
-      {
-        "id": "491747",
-        "name": "Sylpha",
-        "gender": "Mujer",
-        "tags": ["sylpha_(dai_nana_oji)"],
-        "value": 100
-      },
-      {
-        "id": "214040",
-        "name": "Yuifa Tao",
-        "gender": "Mujer",
-        "tags": ["tao_yuifa"],
-        "value": 100
-      },
-      {
-        "id": "975036",
-        "name": "Ren",
-        "gender": "Mujer",
-        "tags": ["ren_(dai_nana_oji)"],
-        "value": 100
-      },
-      {
-        "id": "458847",
-        "name": "Grim",
-        "gender": "Mujer",
-        "tags": ["grim_(dai_nana_oji)"],
-        "value": 100
-      }
-    ]
+  {
+    "id": 7,
+    "nombre": "Denji",
+    "foto": "https://qu.ax/aPKnG.jpg",
+    "estado": "Libre"
   },
-  "66787881": {
-    "name": "Black Clover",
-    "characters": [
-      {
-        "id": "188433",
-        "name": "Noelle Silva",
-        "gender": "Mujer",
-        "tags": ["noelle_silva"],
-        "value": 100
-      },
-      {
-        "id": "544691",
-        "name": "Nero",
-        "gender": "Mujer",
-        "tags": ["nero_(black_clover)"],
-        "value": 100
-      },
-      {
-        "id": "276677",
-        "name": "Mimosa Vermillion",
-        "gender": "Mujer",
-        "tags": ["mimosa_vermillion"],
-        "value": 100
-      },
-      {
-        "id": "396281",
-        "name": "Mereoleona Vermillion",
-        "gender": "Mujer",
-        "tags": ["mereoleona_vermillion"],
-        "value": 100
-      },
-      {
-        "id": "228331",
-        "name": "Vanica Zogratis",
-        "gender": "Mujer",
-        "tags": ["vanica_zogratis"],
-        "value": 100
-      },
-      {
-        "id": "922541",
-        "name": "Lily Aquaria",
-        "gender": "Mujer",
-        "tags": ["lily_aquaria"],
-        "value": 100
-      },
-      {
-        "id": "565769",
-        "name": "Vanessa Enoteca",
-        "gender": "Mujer",
-        "tags": ["vanessa_enoteca"],
-        "value": 100
-      }
-    ]
+  {
+    "id": 8,
+    "nombre": "KoKoShiBo",
+    "foto": "https://qu.ax/lzzXv.jpg",
+    "estado": "Libre"
+  },
+  {
+    "id": 9,
+    "nombre": "Himno",
+    "foto": "https://qu.ax/ptgWj.jpg",
+    "estado": "Libre"
+  },
+  {
+    "id": 10,
+    "nombre": "Furina",
+    "foto": "https://raw.githubusercontent.com/IrokzDal/uploads/main/1759792691687.jpeg",
+    "estado": "Libre"
   }
-}
