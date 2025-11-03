@@ -3,9 +3,9 @@ import { promises as fsp } from 'fs'
 import path from 'path'
 
 // Paths
-const BASE_DB = './src/database'
-const CHAR_PATH = path.join(BASE_DB, 'characters.json')
-const VENTA_PATH = path.join(BASE_DB, 'waifusVenta.json')
+const BASE_DB = './jsons'
+const CHAR_PATH = path.join(BASE_DB, 'waifus.json')
+const VENTA_PATH = path.join(BASE_DB, 'waifu.json')
 const HAREM_PATH = path.join(BASE_DB, 'harem.json')
 const CLAIM_MSG_PATH = path.join(BASE_DB, 'userClaimConfig.json')
 
