@@ -122,7 +122,9 @@ let handler = async (m, { conn }) => {
   } catch (e) { rankText = 'N/A' }
 
   // construir texto según el template proporcionado
-  let txt = `*Singa su madre to creen bot ustedes mamaguevaso*
+  let txt = `*😿Error:*
+
+- El menú está en proceso de reconstrucción, crea un bot tu o chupame la ñema hijo de perra.
 `.trim()
 
   // mentions: mencionar al usuario que abrió el menú (opc.)
