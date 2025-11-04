@@ -122,204 +122,118 @@ let handler = async (m, { conn }) => {
   } catch (e) { rankText = 'N/A' }
 
   // construir texto según el template proporcionado
-  let txt = `Hola, esta es la lista de los países de mierda que odio:
+  let txt = `¡𝐇𝐨𝐥𝐚! Soy *${nombreBot}* *${(conn.user.jid == global.conn.user.jid ? '(OficialBot)' : '(Sub-Bot)')}*
 
-- Afganistán
-- Albania
-- Alemania
-- Andorra
-- Angola
-- Antigua y Barbuda
-- Arabia Saudita
-- Argelia
-- Argentina
-- Armenia
-- Australia
-- Austria
-- Azerbaiyán
-- Bahamas
-- Bangladés
-- Barbados
-- Baréin
-- Bélgica
-- Belice
-- Benín
-- Bielorrusia
-- Bolivia
-- Bosnia y Herzegovina
-- Botsuana
-- Brasil
-- Brunéi
-- Bulgaria
-- Burkina Faso
-- Burundi
-- Bután
-- Cabo Verde
-- Camboya
-- Camerún
-- Canadá
-- Catar
-- Chad
-- Chile
-- China
-- Chipre
-- Ciudad del Vaticano
-- Colombia
-- Comoras
-- Congo
-- Corea del Norte
-- Corea del Sur
-- Costa de Marfil
-- Costa Rica
-- Croacia
-- Cuba
-- Dinamarca
-- Dominica
-- Ecuador
-- Egipto
-- El Salvador
-- Emiratos Árabes Unidos
-- Eritrea
-- Eslovaquia
-- Eslovenia
-- España
-- Estados Unidos
-- Estonia
-- Etiopía
-- Filipinas
-- Finlandia
-- Fiyi
-- Francia
-- Gabón
-- Gambia
-- Georgia
-- Ghana
-- Granada
-- Grecia
-- Guatemala
-- Guinea
-- Guinea-Bisáu
-- Guinea Ecuatorial
-- Guyana
-- Haití
-- Honduras
-- Hungría
-- India
-- Indonesia
-- Irak
-- Irán
-- Irlanda
-- Islandia
-- Islas Marshall
-- Islas Salomón
-- Israel
-- Italia
-- Jamaica
-- Japón
-- Jordania
-- Kazajistán
-- Kenia
-- Kirguistán
-- Kiribati
-- Kosovo
-- Kuwait
-- Laos
-- Lesoto
-- Letonia
-- Líbano
-- Liberia
-- Libia
-- Liechtenstein
-- Lituania
-- Luxemburgo
-- Macedonia del Norte
-- Madagascar
-- Malasia
-- Malaui
-- Maldivas
-- Malí
-- Malta
-- Marruecos
-- Mauricio
-- Mauritania
-- México
-- Micronesia
-- Moldavia
-- Mónaco
-- Mongolia
-- Montenegro
-- Mozambique
-- Birmania
-- Namibia
-- Nauru
-- Nepal
-- Nicaragua
-- Níger
-- Nigeria
-- Noruega
-- Nueva Zelanda
-- Omán
-- Países Bajos
-- Pakistán
-- Palaos
-- Palestina
-- Panamá
-- Papúa Nueva Guinea
-- Paraguay
-- Perú
-- Polonia
-- Portugal
-- Reino Unido
-- República Centroafricana
-- República Checa
-- República del Congo
-- República Dominicana
-- Ruanda
-- Rumania
-- Rusia
-- Samoa
-- San Cristóbal y Nieves
-- San Marino
-- San Vicente y las Granadinas
-- Santa Lucía
-- Santo Tomé y Príncipe
-- Senegal
-- Serbia
-- Seychelles
-- Sierra Leona
-- Singapur
-- Siria
-- Somalia
-- Sri Lanka
-- Suazilandia
-- Sudáfrica
-- Sudán
-- Sudán del Sur
-- Suecia
-- Suiza
-- Surinam
-- Tailandia
-- Tanzania
-- Tayikistán
-- Timor Oriental
-- Togo
-- Tonga
-- Trinidad y Tobago
-- Túnez
-- Turkmenistán
-- Turquía
-- Tuvalu
-- Ucrania
-- Uganda
-- Uruguay
-- Uzbekistán
-- Vanuatu
-- Venezuela
-- Vietnam
-- Yemen
-- Yibuti
-- Zambia
-- Zimbabue
+> ꒰⌢ ʚ˚₊‧ ✎ ꒱ INFO:
+- ${nombreBot} es un bot privado, el cual el bot principal no se unirá a tus grupos. Si quieres tener el bot en tu grupo tienes que ser Sub-Bot con *(#code)*
+> ꒰⌢ ʚ˚₊‧ ✎ ꒱ ❐ ʚ˚₊‧ʚ˚₊‧ʚ˚
+
+*╭╼𝅄꒰𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ꒱ 𐔌 BOT - INFO 𐦯*
+*|✎ Creador:* 𓆩‌۫᷼ ִֶָღܾ݉͢ғ꯭ᴇ꯭፝ℓɪ꯭ͨא𓆪
+*|✎ Users:* ${totalreg.toLocaleString()}
+*|✎ Uptime:* ${uptime}
+*|✎ Ping:* ${p}
+*|✎ Baileys:* PixelCrew-Bails
+*╰─ׅ─ׅ┈─๋︩︪─☪︎︎︎̸⃘࣭ٜ࣪࣪࣪۬◌⃘۪֟፝֯۫۫︎⃪𐇽۫۬👑⃘⃪۪֟፝֯۫۫۫۬◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸─ׅ─ׅ┈─๋︩︪─╯*
+
+
+*╭╼𝅄꒰𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ꒱ 𐔌 INFO - USER 𐦯*
+*|✎ Nombre:* ${username}
+*|✎ ${currency}:* ${userMoney}
+*|✎ Exp:* ${userExp}
+*|✎ Rango:* ${rango}
+*|✎ Nivel:* ${userLevel}
+*╰─ׅ─ׅ┈─๋︩︪─☪︎︎︎̸⃘࣭ٜ࣪࣪࣪۬◌⃘۪֟፝֯۫۫︎⃪𐇽۫۬👑⃘⃪۪֟፝֯۫۫۫۬◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸─ׅ─ׅ┈─๋︩︪─╯*
+
+
+*➪ 𝗟𝗜𝗦𝗧𝗔*
+       *➪  𝗗𝗘*
+           *➪ 𝗖𝗢𝗠𝗔𝗡𝗗𝗢𝗦*
+
+
+*꒰⌢◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸ ✎ ꒱ 𐔌 HERRAMIENTAS 𐦯*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #pinterest <texto>*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #play <musica>*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #catbox <imagen>*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #toimg <sticker>*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #pin <texto>*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #yts*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #ytv*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #play2*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #ytm3*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #ytmp4*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #yta*
+*╰─ׅ─ׅ┈ ─๋︩︪─☪︎︎︎̸⃘̸࣭ٜ࣪࣪࣪۬◌⃘۪֟፝֯۫۫︎⃪𐇽۫۬👑⃘⃪۪֟፝֯۫۫۫۬◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸─ׅ─ׅ┈ ─๋︩︪─╯*
+
+
+*꒰⌢◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸ ✎ ꒱ 𐔌 SOCKETS  𐦯*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #qr*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #code*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #self <on/off>*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #sologp <on/off>*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #leave*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #setname <nombre>*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #setbanner <foto>*
+*╰─ׅ─ׅ┈─๋︩︪─☪︎︎︎̸⃘̸࣭ٜ࣪࣪࣪۬◌⃘۪֟፝֯۫۫︎⃪𐇽۫۬👑⃘⃪۪֟፝֯۫۫۫۬◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸─ׅ─ׅ┈─๋︩︪─╯*
+
+
+*꒰⌢◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸ ✎ ꒱ 𐔌 STICKERS  𐦯*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #s
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #sticker
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #brat
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #qc
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #emojimix
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #take
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #wm
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #bratv
+*╰─ׅ─ׅ┈─๋︩︪─☪︎︎︎̸⃘࣭ٜ࣪࣪࣪۬◌⃘۪֟፝֯۫۫︎⃪𐇽۫۬👑⃘⃪۪֟፝֯۫۫۫۬◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸─ׅ─ׅ┈─๋︩︪─╯*
+
+
+*꒰⌢◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸ ✎ ꒱ 𐔌 RPG  𐦯*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #daily
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #cofre
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #minar
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #rob
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #rob2
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #depositar <all>
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #d <all>
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #lvl
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #bal
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #baltop
+*╰─ׅ─ׅ┈─๋︩︪─☪︎︎︎̸⃘࣭ٜ࣪࣪࣪۬◌⃘۪֟፝֯۫۫︎⃪𐇽۫۬👑⃘⃪۪֟፝֯۫۫۫۬◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸─ׅ─ׅ┈─๋︩︪─╯*
+
+
+*꒰⌢◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸ ✎ ꒱ 𐔌 GESTIÓN 𐦯*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #testwelcome
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #testbye
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #bye <on/off>*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #welcome <on/off>*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #antienlace <on/off>*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #antilink <on/off>*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #modoadmin <on/off>* 
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #detect <on/off>* 
+*╰─ׅ─ׅ┈─๋︩︪─☪︎︎︎̸⃘࣭ٜ࣪࣪࣪۬◌⃘۪֟፝֯۫۫︎⃪𐇽۫۬👑⃘⃪۪֟፝֯۫۫۫۬◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸─ׅ─ׅ┈─๋︩︪─╯*
+
+
+*꒰⌢◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸ ✎ ꒱ 𐔌 GRUPOS 𐦯*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #demote*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #promote*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #delete*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #kick*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #del*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #promover*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #degradar*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #delprimary*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #setprimary*
+*╰─ׅ─ׅ┈─๋︩︪─☪︎︎︎̸⃘࣭ٜ࣪࣪࣪۬◌⃘۪֟፝֯۫۫︎⃪𐇽۫۬👑⃘⃪۪֟፝֯۫۫۫۬◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸─ׅ─ׅ┈─๋︩︪─╯*
+
+
+*꒰⌢◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸ ✎ ꒱ 𐔌 OWNER  𐦯*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #autoadmin*
+> *𑁍⃪࣭۪ٜ݊݊݊݊݊໑ٜ࣪ ❏ #join*
+*╰─ׅ─ׅ┈─๋︩︪─☪︎︎︎̸⃘࣭ٜ࣪࣪࣪۬◌⃘۪֟፝֯۫۫︎⃪𐇽۫۬👑⃘⃪۪֟፝֯۫۫۫۬◌⃘࣭ٜ࣪࣪࣪۬☪︎︎︎︎̸─ׅ─ׅ┈─๋︩︪─╯*
+
+> ✰ 𝐃𝐞𝐬𝐜𝐨𝐧𝐨𝐜𝐢𝐝𝐨 𝐗𝐳𝐬𝐲 (•̀ᴗ•́)و
 `.trim()
 
   // mentions: mencionar al usuario que abrió el menú (opc.)
