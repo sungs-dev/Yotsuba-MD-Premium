@@ -75,5 +75,4 @@ let handler = async (m, { conn }) => {
 }
 
 handler.command = ['sockets', 'bots']
-handler.group = true
 export default handler
