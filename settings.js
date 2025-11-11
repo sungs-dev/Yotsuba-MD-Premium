@@ -7,7 +7,7 @@ import fs from "fs"
 
 global.owner = [
 "573235915041",
-"16503058299"
+"18094374392"
 ]
 
 global.suittag = ["1829×××××××"] 
