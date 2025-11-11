@@ -32,7 +32,7 @@ function handler(m, {groupMetadata}) {
   do j = ps[Fl(R() * ps.length)];
   while (b === a);
   m.reply(
-    `*😍_Las 5 mejores parejas del grupo_😍*
+    `*_Las 5 mejores parejas del grupo_*
     
 *_1.- ${toM(a)} y ${toM(b)}_*
 - Esta pareja esta destinada a estar junta 💙
