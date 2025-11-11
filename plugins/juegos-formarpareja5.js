@@ -34,20 +34,20 @@ function handler(m, {groupMetadata}) {
   m.reply(
     `*_Las 5 mejores parejas del grupo_*
     
-1.- ${toM(a)} y ${toM(b)}
+1 - ${toM(a)} y ${toM(b)}
 - Esta pareja esta destinada a estar junta 💙
 
-2.- ${toM(c)} y ${toM(d)}
+2 - ${toM(c)} y ${toM(d)}
 - Esta pareja son dos pequeños tortolitos enamorados ✨
 
-3.- ${toM(e)} y ${toM(f)}
+3 - ${toM(e)} y ${toM(f)}
 - Esta pareja ya tiene 2 hijos 🤱🧑‍🍼
 
-4.- ${toM(g)} y ${toM(h)}
+4 - ${toM(g)} y ${toM(h)}
 - Estos ya se casaron en secreto 💍
 
-5.- ${toM(i)} y ${toM(j)}
-- Esta pareja se esta de luna de miel ✨🥵😍❤️*`,
+5 - ${toM(i)} y ${toM(j)}
+- Esta pareja se esta de luna de miel ✨🥵😍`,
     null,
     {
       mentions: [a, b, c, d, e, f, g, h, i, j],
